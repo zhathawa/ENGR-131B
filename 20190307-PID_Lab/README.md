@@ -7,39 +7,45 @@ The Arduino will have functions as follows:
 - Identification (\*IDN?)
   - The Arduino will return the model and/or a message that this is an Arduino
 
-- Pulse Generator (:PUL:<n>), where <n> is:
+- Pulse Generator (:PUL:X), where X is:
   - ?
     - current state of pulse generator (ON or OFF)
-  - SET: and some integer number [1, 1000]
+  - SET:N and N is some integer number [1, 1000]
     - create digital pulse between 1 and 1000 Hz on pin D2
   - OFF
     - turn pulse generator off
 
 
-- Manual Joystick Mode (:MAN:<n>), where <n> is:
+- Manual Joystick Mode (:MAN:X), where X is:
   - ?
     - current state of Joystick (ON or OFF)
-  - SET: and some integer number [1, 10]
+  - SET:N and N is some integer number [1, 10]
       - set sensitivity of joystick
   - ON
     - turn joystick on
   - OFF
     - turn joystick off
 
-- Angle of Servo (:ANG:<n>), where <n> is:
+- Angle of Servo (:ANG:X), where X is:
   - ?
     - current angle of servo (integer)
-  - SET: and some integer number [1, 90] degrees *tentative*
+  - SET:N and N is some integer number [1, 90] degrees *tentative*
       - set angle of servo
 
-- Distance of Ultrasound (:ULT:<n>), where <n> is:
+- Distance of Ultrasound (:ULT:X), where X is:
   - ?
     - current time value of ultrasound sensor (float)
 
-- Control of PID (:CON:<pid>), where <pid> is P, I, or D:
-  - P:<n> (Proportional Query/Control), and <n> is:
+- Control of PID (:CON:X), where X is P, I, or D:
+  - P:Y (Proportional Query/Control), and Y is:
     - ?
       - Current value
     - SET: and some float up to 3 point decimal *maybe can't remember*
-  - I:<n> (Integral)
-  - D:<n> (Derivative)
+  - I:X (Integral)
+  - D:X (Derivative)
+
+- Examples:
+  - Set the pulse generator to 10 Hz and turn it on
+    - :PUL:SET:10\n:PUL:ON
+  - Return the current D value in PID control
+    - :CON:P:?
