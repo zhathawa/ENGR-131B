@@ -7,45 +7,50 @@ The Arduino will have functions as follows:
 - Identification (\*IDN?)
   - The Arduino will return the model and/or a message that this is an Arduino
 
-- Pulse Generator (:PUL:X), where X is:
+- Pulse Generator (:PULX), where X is:
   - ?
     - current state of pulse generator (ON or OFF)
-  - SET:N and N is some integer number [1, 1000]
+  - :SET:N and N is some integer number [1, 1000]
     - create digital pulse between 1 and 1000 Hz on pin D2
-  - OFF
+  - :OFF
     - turn pulse generator off
+  - :ON
+    - turn pulse generator on
 
 
-- Manual Joystick Mode (:MAN:X), where X is:
+- Manual Joystick Mode (:MANX), where X is:
   - ?
     - current state of Joystick (ON or OFF)
-  - SET:N and N is some integer number [1, 10]
+  - :SET:N and N is some integer number [1, 10]
       - set sensitivity of joystick
-  - ON
+  - :ON
     - turn joystick on
-  - OFF
+  - :OFF
     - turn joystick off
 
-- Angle of Servo (:ANG:X), where X is:
+- Angle of Servo (:ANGX), where X is:
   - ?
     - current angle of servo (integer)
-  - SET:N and N is some integer number [1, 90] degrees *tentative*
+  - :SET:N and N is some integer number [1, 90] degrees *tentative*
       - set angle of servo
 
-- Distance of Ultrasound (:ULT:X), where X is:
+- Distance of Ultrasound (:ULTX), where X is:
   - ?
     - current time value of ultrasound sensor (float)
 
 - Control of PID (:CON:X), where X is P, I, or D:
-  - P:Y (Proportional Query/Control), and Y is:
+  - :PY (Proportional Query/Control), and Y is:
     - ?
       - Current value
-    - SET: and some float up to 3 point decimal *maybe can't remember*
-  - I:X (Integral)
-  - D:X (Derivative)
+    - :SET:N and N is some float up to 3 point decimal *maybe can't remember*
+  - IY (Integral), and Y is the same arguments as above
+  - DY (Derivative), and Y is the same arguments as above
 
 - Examples:
   - Set the pulse generator to 10 Hz and turn it on
-    - :PUL:SET:10\n:PUL:ON
-  - Return the current D value in PID control
-    - :CON:P:?
+    - :PUL:SET:10
+    - :PUL:ON
+  - Return the current P, I, and D values in PID control
+    - :CON:P?
+    - :CON:I?
+    - :CON:D?
