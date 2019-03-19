@@ -1,32 +1,30 @@
-#define err(msg, errno) { Serial.println("%s", msg); return errno };
-
-// pointers for commands
-char* mode;
-char* cmd;
-char* opt;
+// pointer for commands
+char* options;
 
 // various things
 int int_arg;
-int count = 1;
+int count = 0;
 int charsRead;
 
 float flt_arg;
 
 char msg[50];
 
+struct commands
+{
+  // mode optional
+  char* mode;
+
+  // non-optional
+  char* func;
+  char* cmd;
+  char* opt;
+};
+
+struct commands cmds;
+
 void setup() {
-  mode = malloc(sizeof(char) * 4);
-  if (mode == NULL)
-	err("Could not allocate memory for mode", NULL);
-
-  cmd = malloc(sizeof(char) * 4);
-  if (cmd == NULL)
-	err("Could not allocate memory for cmd", NULL);
-
-  opt = malloc(sizeof(char) * 4);
-  if (opt == NULL)
-	err("Could not allocate memory for opt", NULL);
-
+  init_commands();
   Serial.begin(115200);
 }
 
@@ -36,29 +34,31 @@ void loop() {
   // check that we have things to read
   if(Serial.available())
   {
-    chars = Serial.readBytesUntil('\n', msg, sizeof(msg) - 1);
-    msg[chars] = '\0';
-	
-    int limit = strlen(msg);
+    // read from serial port
+    charsRead = Serial.readBytesUntil('\n', msg, sizeof(msg) - 1);
 
-	char* fn= malloc(sizeof(char)*4);
-	fn = strncpy(fn, &fn[1], 4);
+    // make c string
+    msg[charsRead] = '\0';
+
+    // tokenize
+    options = strtok(msg, ":");
+    while (options != NULL)
+    {
+      count++;
+      set_commands(options, count);
+    }
   }
-	
-
-  // cleanup
-  freeArgs();
 }
 
-
-void* grabInput(char* msg, int position)
+void init_commands()
 {
-	: 
+  cmds.mode = NULL;
+  cmds.func = NULL;
+  cmds.cmd  = NULL;
+  cmds.opt  = NULL;
 }
 
-void* freeArgs()
+void set_commands(char* option, int count)
 {
-	free(mode);
-	free(cmd);
-	free(opt);
 }
+
