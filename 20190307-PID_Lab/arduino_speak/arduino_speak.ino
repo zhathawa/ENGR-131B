@@ -16,8 +16,6 @@ float flt_arg;
 
 char msg[50];
 
-struct commands cmds;
-
 void setup() {
   init_commands(&cmds);
   pinMode(13, OUTPUT);
