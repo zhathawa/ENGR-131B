@@ -14,7 +14,7 @@ struct commands
   char* func;
   char* cmd;
   char* opt;
-  
+
 } cmds;
 
 void init_commands(struct commands *cmds)
@@ -31,12 +31,12 @@ void check_info(generic_object obj)
   Serial.write(obj.get_state());
 }
 
-void set_commands(struct commands *cmds, char *option, int count)
+void set_commands(struct commands *cmds, char *option)
 {
   // bytes to check in strncmp
   int b2chk = 3;
   int qByte = 1;
-  
+
   // just check out info
   if (strcmp(option, "*IDN?") == 0)
   {
@@ -64,25 +64,25 @@ void set_commands(struct commands *cmds, char *option, int count)
       check_info(ardy.get_joystick());
       return;
     }
-    
+
   }
 
   // servo
   else if (strncmp(option, "ANG", b2chk) == 0)
   {
-    
+
   }
 
   // ultrasound
   else if (strncmp(option, "ULT", b2chk) == 0)
   {
-    
+
   }
 
   // PID info
   else if (strncmp(option, "CON", b2chk) == 0)
   {
-    
+
   }
 
   // default
