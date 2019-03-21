@@ -55,10 +55,6 @@ void set_commands(struct commands *cmds, char *option, int count)
       check_info(ardy.get_pgen());
       return;
     }*/
-    ardy.get_pgen().set_frequency(2);
-    ardy.get_pgen().start_pulse();
-    delay(10000);
-    ardy.get_pgen().stop_pulse();
   }
 
   // manual mode

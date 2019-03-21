@@ -30,10 +30,9 @@ void setup() {
 void loop() {
 
   
-    pgen.start_pulse();
-    delay(10000);
-    pgen.stop_pulse();
-    delay(10000);
+    pgen.high_pulse();
+    pgen.low_pulse();
+    delay(1000);
 
     
 //  // check that we have things to read

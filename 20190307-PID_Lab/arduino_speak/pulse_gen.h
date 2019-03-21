@@ -49,28 +49,23 @@ class PulseGenerator
       pinMode(pin, OUTPUT);
     }
 
-    void start_pulse()
+    void high_pulse()
     {
       if (this->state == OFF)
       {
         this->state = ON;
-        //digitalWrite(this->pin, ON);
-        while (this->state == ON)
-        {
-          digitalWrite(this->pin, HIGH);
-          delay(1000/this->frequency);
-          digitalWrite(this->pin, LOW);
-          delay(1000/this->frequency);
-        }
+        digitalWrite(this->pin, ON);
+        delay(500/this->frequency);
       }
     }
 
-    void stop_pulse()
+    void low_pulse()
     {
       if (this->state == ON)
       {
         this->state = OFF;
-        //digitalWrite(this->pin, OFF);
+        digitalWrite(this->pin, OFF);
+        delay(500/this->frequency);
       }
     }
 
