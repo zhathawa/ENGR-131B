@@ -16,13 +16,13 @@ class JoyStick
       this->sensitivity = 0;
     }
 
-    Joystick(int sensitivity)
+    JoyStick(int sensitivity)
     {
       this->state = OFF;
       this->sensitivity = sensitivity;
     }
 
-    PulseGenerator(int state, int sensitivity)
+    JoyStick(int state, int sensitivity)
     {
       this->state = state;
       this->sensitivity = sensitivity;
@@ -33,7 +33,7 @@ class JoyStick
     void set_state(int state) {this->state = state;}
 
     int get_sensitivity() {return this->sensitivity;}
-    void set_frequency(int frequency) {this->sensitivity = frequency;}
+    void set_sensitivity(int sensitivity) {this->sensitivity = sensitivity;}
     
 };
 
