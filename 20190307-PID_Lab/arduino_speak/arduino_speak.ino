@@ -34,7 +34,7 @@ void loop() {
     //pgen.low_pulse();
     //delay(1000);
 // check that we have things to read
- if(Serial.available() && count < 1)
+ if(Serial.available())
  {
    // read from serial port
    charsRead = Serial.readBytesUntil('\n', msg, sizeof(msg) - 1);
@@ -60,7 +60,6 @@ void loop() {
      //set_commands(options, count);
    }
   }
-  count++;
 
   delay(100);
 }

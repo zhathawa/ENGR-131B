@@ -28,7 +28,7 @@ void init_commands(struct commands *cmds)
 template <class generic_object>
 void check_info(generic_object obj)
 {
-  Serial.write(obj.get_state());
+  Serial.print(obj.get_state());
 }
 
 void set_commands(struct commands *cmds, char *option)
@@ -47,10 +47,15 @@ void set_commands(struct commands *cmds, char *option)
   }
 
   // pulse generator
-  else if (strncmp(option, ":PUL", b2chk) == 0)
+  else if (strncmp(option, "PUL", b2chk) == 0)
   {
+    Serial.write("PUL block\n");
+    char buf[50];
+    sprintf(buf, "option = %s\n", option);
+    Serial.write(buf);
     if (strncmp(option[3], "?", qByte) == 0)
     {
+      Serial.write("Got into the appropriate block\n");
       check_info(ardy.get_pgen());
       return;
     }
