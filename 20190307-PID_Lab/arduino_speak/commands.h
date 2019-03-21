@@ -49,12 +49,11 @@ void set_commands(struct commands *cmds, char *option, int count)
   // pulse generator
   else if (strncmp(option, "PUL", b2chk) == 0)
   {
-    /*
     if (strncmp(option[3], "?", qByte) == 0)
     {
       check_info(ardy.get_pgen());
       return;
-    }*/
+    }
   }
 
   // manual mode

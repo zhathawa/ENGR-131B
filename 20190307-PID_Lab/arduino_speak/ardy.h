@@ -11,9 +11,7 @@ class Ardy
     Joystick joy;
 
   public:
-    Ardy()
-    {
-    }
+    Ardy() {};
     PulseGenerator get_pgen() { return this->pgen; }
     Joystick get_joystick() { return this->joy; }
 
