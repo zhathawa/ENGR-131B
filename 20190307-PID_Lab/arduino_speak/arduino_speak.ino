@@ -17,6 +17,7 @@ float flt_arg;
 char msg[50];
 
 PulseGenerator pgen;
+Ardy ardy;
 
 void setup() {
   init_commands(&cmds);
