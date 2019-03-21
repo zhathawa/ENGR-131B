@@ -3,26 +3,26 @@
 
 #include "states.h"
 
-class JoyStick
+class Joystick
 {
   private:
     int state;
     int sensitivity;
 
   public:
-    JoyStick()
+    Joystick()
     {
       this->state = OFF;
       this->sensitivity = 0;
     }
 
-    JoyStick(int sensitivity)
+    Joystick(int sensitivity)
     {
       this->state = OFF;
       this->sensitivity = sensitivity;
     }
 
-    JoyStick(int state, int sensitivity)
+    Joystick(int state, int sensitivity)
     {
       this->state = state;
       this->sensitivity = sensitivity;

@@ -8,11 +8,17 @@ class Ardy
 {
   private:
     PulseGenerator pgen;
-    JoyStick joy;
+    Joystick joy;
 
   public:
+    Ardy()
+    {
+    }
     PulseGenerator get_pgen() { return this->pgen; }
-    JoyStick get_joystick() { return this->joy; }
+    Joystick get_joystick() { return this->joy; }
+
+
+    
     
 };
 
