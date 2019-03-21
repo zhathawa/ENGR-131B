@@ -47,7 +47,7 @@ void set_commands(struct commands *cmds, char *option)
   }
 
   // pulse generator
-  else if (strncmp(option, "PUL", b2chk) == 0)
+  else if (strncmp(option, ":PUL", b2chk) == 0)
   {
     if (strncmp(option[3], "?", qByte) == 0)
     {

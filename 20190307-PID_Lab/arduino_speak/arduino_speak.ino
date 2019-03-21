@@ -33,10 +33,8 @@ void loop() {
     //pgen.high_pulse();
     //pgen.low_pulse();
     //delay(1000);
-
-
 // check that we have things to read
- if(Serial.available())
+ if(Serial.available() && count < 1)
  {
    // read from serial port
    charsRead = Serial.readBytesUntil('\n', msg, sizeof(msg) - 1);
@@ -45,7 +43,7 @@ void loop() {
    msg[charsRead] = '\0';
 
 
-    grab first token
+  //  grab first token
    options = strtok(msg, ":");
 
    while (options != NULL)
@@ -62,6 +60,7 @@ void loop() {
      //set_commands(options, count);
    }
   }
+  count++;
 
   delay(100);
 }
