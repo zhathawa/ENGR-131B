@@ -12,13 +12,13 @@ class PulseGenerator
   public:
     PulseGenerator()
     {
-      this->state = 0;
+      this->state = OFF;
       this->frequency = 0;
     }
 
     PulseGenerator(int frequency)
     {
-      this->state = 1;
+      this->state = ON;
       this->frequency = frequency;
     }
 
@@ -34,7 +34,11 @@ class PulseGenerator
 
     int get_frequency() {return this->frequency;}
     void set_frequency(int frequency) {this->frequency = frequency;}
-    
+
+    void change_pin(int value, int pin_num)
+    {
+      
+    }
 };
 
 #endif
