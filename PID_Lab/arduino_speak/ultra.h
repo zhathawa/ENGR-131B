@@ -48,7 +48,7 @@ class Ultrasonic
 		void set_state(int state) { this->state = state; }
 	
 		float get_distance() { return this->distance; }
-		void  set_distance(float d} { distance = d; }
+		void  set_distance(float d) { distance = d; }
 
 		long get_duration() { return this->duration; }
 		void set_duration(long d) { duration = d; }
