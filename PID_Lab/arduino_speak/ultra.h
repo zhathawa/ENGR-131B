@@ -24,7 +24,7 @@ class Ultrasonic
 		// constructors
 		Ultrasonic()
 		{
-			this->state = 0;
+			this->state = ON;
 			this->distance = 0.0;
 			this->duration = 0.0;
 			this->trig = 9;
@@ -33,7 +33,7 @@ class Ultrasonic
 	
 		Ultrasonic(int trig, int echo)
 		{
-			this->state = 0;
+			this->state = OFF;
 			this->distance = 0.0;
 			this->duration = 0.0;
 			this->trig = trig;
@@ -60,6 +60,38 @@ class Ultrasonic
 		void set_echo(int echo) { this->echo = echo; }
 
 		// TODO: ADD ultrasonic sensor control code
+		void info()
+		{
+			Serial.print("Duration: ");
+			Serial.println(this->duration);
+			Serial.print("Distance: ");
+			Serial.println(this->distance);
+		}
+
+
+		void start()
+		{
+			if (this->state == OFF)
+				this->state = ON;
+			
+			// Michael's code from arduino_see.ino
+			// clear
+			digitalWrite(this->trig, LOW);
+			delayMicroseconds(2);
+			
+			// 10 us pulse
+			digitalWrite(this->trig, HIGH);
+			delayMicroseconds(10);
+			digitalWrite(this->trig, LOW);
+			
+			// how long?
+			this->duration = pulseIn(this->echo, HIGH);
+
+			// fancy math
+			// speed of sound: 0.034 cm/us
+			// 2 to account for there and back
+			this->distance = this->duration * 0.034/2;
+		}
 };
 
 #endif 	

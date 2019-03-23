@@ -136,6 +136,10 @@ void set_commands(struct commands *cmds, char *msg)
   // ultrasound
   else if (strncmp(option, "ULT", b2chk) == 0)
   {
+	if (option[3] == '?')
+	{
+		ardy.get_ultra().info();
+	}
 
   }
 
