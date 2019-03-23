@@ -51,14 +51,17 @@ void set_commands(struct commands *cmds, char *msg)
     // would probably be better to move the info we actually want
     // to return to the ardy.h file
     Serial.write("This is an Arduino Uno knock off.\n");
+    cmds->mode = "*IDN?";
   }
 
   // pulse generator
   else if (strncmp(option, "PUL", b2chk) == 0)
   {
+    cmds->mode = "PUL";
     if (option[3] == '?')
     {
-      check_info(ardy.get_pgen());  
+      check_info(ardy.get_pgen());
+      cmds->func = "?";
       return;
     }
     else //if (option[3] == ':')
@@ -67,26 +70,42 @@ void set_commands(struct commands *cmds, char *msg)
       // SET N for setting the frequency lims [1, 1000]
       if (strncmp(option, "SET", b2chk) == 0)
       {
+        cmds->func = "SET";
+        
+        // get next token
         option = strtok(NULL, " ");
+
+        // make sure we have an integer
         int frq = atoi(option);
-        //ardy.get_pgen().set_frequency(frq);
+
+        // set frequency
         ardy.set_pgen_frq(frq);
+        
         return;
       }
       // ON for turning pulse generator on
       if (strncmp(option, "ON", 2) == 0)
       {
-        //ardy.get_pgen().set_state(ON);
+        // set stuff
         ardy.set_pgen_state(ON);
+
+        // inform user
         Serial.println("Pulse ON\n");
+
+        // TO DO: actually turn on pulse generator
+        // make sure frequency > 0 first
+        // inform user if it isn't
+        
         return;
       }
       // OFF for turning pulse generator off
       if (strncmp(option, "OFF", b2chk) == 0)
       {
-        //ardy.get_pgen().set_state(OFF);
         ardy.set_pgen_state(OFF);
         Serial.write("Pulse OFF\n");
+
+        // TO DO: turn pulse off
+        
         return;
       }
     }
