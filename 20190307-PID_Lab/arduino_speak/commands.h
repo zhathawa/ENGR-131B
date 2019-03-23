@@ -28,15 +28,22 @@ void init_commands(struct commands *cmds)
 template <class generic_object>
 void check_info(generic_object obj)
 {
+  Serial.print("State:\n");
   Serial.print(obj.get_state());
+  Serial.print("\n");
+  Serial.print("Frequency:\n");
+  Serial.print(obj.get_frequency());
+  Serial.print("\n");
 }
 
-void set_commands(struct commands *cmds, char *option)
+void set_commands(struct commands *cmds, char *msg)
 {
   // bytes to check in strncmp
   int b2chk = 3;
   int qByte = 1;
 
+  char* option = strtok(msg, ": ");
+  
   // just check out info
   if (strcmp(option, "*IDN?") == 0)
   {
@@ -49,15 +56,39 @@ void set_commands(struct commands *cmds, char *option)
   // pulse generator
   else if (strncmp(option, "PUL", b2chk) == 0)
   {
-    Serial.write("PUL block\n");
-    char buf[50];
-    sprintf(buf, "option = %s\n", option);
-    Serial.write(buf);
-    if (strncmp(option[3], "?", qByte) == 0)
+    if (option[3] == '?')
     {
-      Serial.write("Got into the appropriate block\n");
-      check_info(ardy.get_pgen());
+      check_info(ardy.get_pgen());  
       return;
+    }
+    else //if (option[3] == ':')
+    {
+      option = strtok(NULL, " ");
+      // SET N for setting the frequency lims [1, 1000]
+      if (strncmp(option, "SET", b2chk) == 0)
+      {
+        option = strtok(NULL, " ");
+        int frq = atoi(option);
+        //ardy.get_pgen().set_frequency(frq);
+        ardy.set_pgen_frq(frq);
+        return;
+      }
+      // ON for turning pulse generator on
+      if (strncmp(option, "ON", 2) == 0)
+      {
+        //ardy.get_pgen().set_state(ON);
+        ardy.set_pgen_state(ON);
+        Serial.println("Pulse ON\n");
+        return;
+      }
+      // OFF for turning pulse generator off
+      if (strncmp(option, "OFF", b2chk) == 0)
+      {
+        //ardy.get_pgen().set_state(OFF);
+        ardy.set_pgen_state(OFF);
+        Serial.write("Pulse OFF\n");
+        return;
+      }
     }
   }
 

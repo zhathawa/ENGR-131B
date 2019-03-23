@@ -11,19 +11,17 @@ char* options;
 int int_arg;
 int count = 0;
 int charsRead;
-
 float flt_arg;
 
 char msg[50];
 
-PulseGenerator pgen;
 Ardy ardy;
 
 void setup() {
   init_commands(&cmds);
-  pgen.set_frequency(2);
   pinMode(13, OUTPUT);
   Serial.begin(115200);
+  delay(500);
   Serial.write("Ready!\n");
 }
 
@@ -43,22 +41,16 @@ void loop() {
    msg[charsRead] = '\0';
 
 
-  //  grab first token
-   options = strtok(msg, ":");
-
+   // grab first token
+   //options = strtok(msg, ":");
+   set_commands(&cmds, msg);
+   /*
    while (options != NULL)
    {
      set_commands(&cmds, options);
-     // Serial.write(options);
-     // digitalWrite(13, HIGH);
-     // delay(1000);
-     // digitalWrite(13, LOW);
-     // delay(1000);
-     // digitalWrite(13, HIGH);
-     // options = strtok(NULL, ":");
-     //count++;
-     //set_commands(options, count);
+     options = strtok(NULL, ":");
    }
+   */
   }
 
   delay(100);

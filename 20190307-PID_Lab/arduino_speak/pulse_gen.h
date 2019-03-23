@@ -35,6 +35,8 @@ class PulseGenerator
       pinMode(pin, OUTPUT);
     }
 
+    ~PulseGenerator(){};
+
     // getters / setters
     int get_state() {return this->state;}
     void set_state(int state) {this->state = state;}

@@ -28,12 +28,16 @@ class Joystick
       this->sensitivity = sensitivity;
     }
 
+    ~Joystick(){};
+
     // getters / setters
     int get_state() {return this->state;}
     void set_state(int state) {this->state = state;}
 
     int get_sensitivity() {return this->sensitivity;}
     void set_sensitivity(int sensitivity) {this->sensitivity = sensitivity;}
+
+    int get_frequency() { return 1; }
     
 };
 

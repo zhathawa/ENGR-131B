@@ -11,13 +11,16 @@ class Ardy
     Joystick joy;
 
   public:
-    Ardy() {};
+    Ardy(){};
+    ~Ardy(){};
+    
     PulseGenerator get_pgen() { return this->pgen; }
     Joystick get_joystick() { return this->joy; }
 
 
-    
-    
+    void set_pgen_frq(int frq) { this->pgen.set_frequency(frq); }
+    void set_pgen_state(int state) { this->pgen.set_state(state); }
+
 };
 
 #endif
