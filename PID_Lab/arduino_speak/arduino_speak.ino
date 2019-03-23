@@ -7,16 +7,16 @@
 // pointer for commands
 char* options;
 
-// various things
-int int_arg;
-int count = 0;
+// chars read from serial line
 int charsRead;
-float flt_arg;
 
+// serial message stored here
 char msg[50];
 
+// main interface with our various functions
 Ardy ardy;
 
+// setup
 void setup() {
   init_commands(&cmds);
   pinMode(13, OUTPUT);
@@ -27,31 +27,32 @@ void setup() {
 
 
 void loop() {
+  // check that we have things to read
+  if (Serial.available())
+  {
+    // read from serial port
+    charsRead = Serial.readBytesUntil('\n', msg, sizeof(msg) - 1);
 
-    //pgen.high_pulse();
-    //pgen.low_pulse();
-    //delay(1000);
-// check that we have things to read
- if(Serial.available())
- {
-   // read from serial port
-   charsRead = Serial.readBytesUntil('\n', msg, sizeof(msg) - 1);
+    // make c string
+    msg[charsRead] = '\0';
 
-   // make c string
-   msg[charsRead] = '\0';
-
-   // grab first token
-   //options = strtok(msg, ":");
-   set_commands(&cmds, msg);
-   
-   /*
-   while (options != NULL)
-   {
-     set_commands(&cmds, options);
-     options = strtok(NULL, ":");
-   }
-   */
+    // parse and set commands up
+    set_commands(&cmds, msg);
   }
 
+
+  // we can do things
+  if (cmds.func != NULL)
+  {
+    // PULSE
+    if (strncmp(cmds.func, "PUL", 3) == 0)
+    {
+      ardy.pulse();
+      return;
+    }
+
+  }
+
+  // gotta do the math to make sure this syncs appropriately
   delay(100);
 }

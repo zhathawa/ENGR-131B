@@ -36,8 +36,14 @@ class Joystick
 
     int get_sensitivity() {return this->sensitivity;}
     void set_sensitivity(int sensitivity) {this->sensitivity = sensitivity;}
-
-    int get_frequency() { return 1; }
+    
+    void info()
+	  {
+	    Serial.print("State: ");
+	    Serial.println(this->state);
+	    Serial.print("Sensitivity: ");
+	    Serial.println(this->sensitivity);
+	  }
     
 };
 

@@ -17,8 +17,14 @@ class Ardy
     PulseGenerator get_pgen() { return this->pgen; }
     Joystick get_joystick() { return this->joy; }
 
+    // PULSE GENERATOR STUFF
     void set_pgen_frq(int frq) { this->pgen.set_frequency(frq); }
     void set_pgen_state(int state) { this->pgen.set_state(state); }
+
+    void pulse()
+    {
+      this->pgen.pulse();
+    }
 
 };
 

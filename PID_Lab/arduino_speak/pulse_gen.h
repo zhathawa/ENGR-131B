@@ -53,9 +53,9 @@ class PulseGenerator
 
     void info()
     {
-      Serial.print("State:");
+      Serial.print("State: ");
       Serial.println(this->state);
-      Serial.print("Frequency:");
+      Serial.print("Frequency: ");
       Serial.println(this->frequency);
     }
 
@@ -81,10 +81,15 @@ class PulseGenerator
 
     void pulse()
     {
-      while (this->state == ON)
-      {
+      // nothing to see or do here
+      if (this->state == OFF)
+        return;
+        
+      high_pulse();
+      low_pulse();
 
-      }
+      // gotta do the math for the delay
+      delay(1000);
     }
 
 };
