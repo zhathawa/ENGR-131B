@@ -6,14 +6,19 @@
 class Joystick
 {
   private:
+	// key software stuff
     int state;
     int sensitivity;
+
+	// key hardware stuff
+	int pin;
 
   public:
     Joystick()
     {
       this->state = OFF;
       this->sensitivity = 0;
+      this->pin = 10;
     }
 
     Joystick(int sensitivity)

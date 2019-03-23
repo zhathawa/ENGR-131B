@@ -86,6 +86,7 @@ void set_commands(struct commands *cmds, char *msg)
 
       return;
     }
+    
     // ON for turning pulse generator on
     if (strncmp(option, "ON", 2) == 0)
     {
@@ -101,6 +102,7 @@ void set_commands(struct commands *cmds, char *msg)
 
       return;
     }
+    
     // OFF for turning pulse generator off
     if (strncmp(option, "OFF", b2chk) == 0)
     {
@@ -111,7 +113,6 @@ void set_commands(struct commands *cmds, char *msg)
 
       return;
     }
-    //}
   }
 
   // manual mode
@@ -123,8 +124,6 @@ void set_commands(struct commands *cmds, char *msg)
       ardy.get_joystick().info();
       return;
     }
-
-
 
   }
 
