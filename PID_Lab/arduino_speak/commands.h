@@ -46,7 +46,7 @@ void set_commands(struct commands *cmds, char *msg)
   // pulse generator
   else if (strncmp(option, "PUL", b2chk) == 0)
   {
-    cmds->mode = "PUL";
+    cmds->func = "PUL";
     if (option[3] == '?')
     {
       //check_info(ardy.get_pgen());
@@ -86,7 +86,7 @@ void set_commands(struct commands *cmds, char *msg)
 
       return;
     }
-    
+
     // ON for turning pulse generator on
     if (strncmp(option, "ON", 2) == 0)
     {
@@ -102,7 +102,7 @@ void set_commands(struct commands *cmds, char *msg)
 
       return;
     }
-    
+
     // OFF for turning pulse generator off
     if (strncmp(option, "OFF", b2chk) == 0)
     {

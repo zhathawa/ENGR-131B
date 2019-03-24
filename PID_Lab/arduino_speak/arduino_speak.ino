@@ -44,17 +44,18 @@ void loop() {
 
 
   // we can do things
-  if (cmds.func != NULL)
+  if (cmds.func == "PUL")
   {
     // PULSE
-    if (strncmp(cmds.func, "PUL", 3) == 0)
+    if (ardy.get_pgen().get_state() == ON)
     {
       ardy.pulse();
+      Serial.println("Pulse Sent!");
       return;
     }
 
   }
 
   // gotta do the math to make sure this syncs appropriately
-  delay(100);
+  // delay(100);
 }

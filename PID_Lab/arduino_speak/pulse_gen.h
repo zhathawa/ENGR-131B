@@ -45,8 +45,8 @@ class PulseGenerator
     void set_frequency(int frequency) {this->frequency = frequency;}
 
     int get_pin() { return this->pin; }
-    void set_pin(int pin) 
-    { 
+    void set_pin(int pin)
+    {
       this->pin = pin;
       pinMode(pin, OUTPUT);
     }
@@ -61,22 +61,22 @@ class PulseGenerator
 
     void high_pulse()
     {
-      if (this->state == OFF)
-      {
-        this->state = ON;
+      // if (this->state == OFF)
+      // {
+      //   this->state = ON;
         digitalWrite(this->pin, ON);
         delay(500/this->frequency);
-      }
+      // }
     }
 
     void low_pulse()
     {
-      if (this->state == ON)
-      {
-        this->state = OFF;
+      // if (this->state == ON)
+      // {
+        // this->state = OFF;
         digitalWrite(this->pin, OFF);
         delay(500/this->frequency);
-      }
+      // }
     }
 
     void pulse()
@@ -84,12 +84,12 @@ class PulseGenerator
       // nothing to see or do here
       if (this->state == OFF)
         return;
-        
+
       high_pulse();
       low_pulse();
 
       // gotta do the math for the delay
-      delay(1000);
+      // delay(1000);
     }
 
 };
