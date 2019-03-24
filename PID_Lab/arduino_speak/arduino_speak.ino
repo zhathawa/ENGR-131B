@@ -24,7 +24,7 @@ void setup() {
   pinMode(13, OUTPUT);
   Serial.begin(115200);
   delay(500);
-  Serial.write("Ready!\n");
+  Serial.println("Ready!");
 }
 
 
@@ -50,7 +50,7 @@ void loop() {
     if (ardy.get_pgen().get_state() == ON)
     {
       ardy.pulse();
-      Serial.println("Pulse Sent!");
+      //Serial.println("Pulse Sent!");
       return;
     }
 

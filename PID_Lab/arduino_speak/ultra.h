@@ -72,10 +72,10 @@ class Ultrasonic
 		{
 			start();
 			delay(1);
-			Serial.print("Duration: ");
+			// Serial.print("Duration: ");
 			Serial.println(this->duration);
-			Serial.print("Distance: ");
-			Serial.println(this->distance);
+			// Serial.print("Distance: ");
+			// Serial.println(this->distance);
 		}
 
 

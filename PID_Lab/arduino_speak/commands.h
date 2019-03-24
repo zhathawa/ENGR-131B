@@ -71,12 +71,12 @@ void set_commands(struct commands *cmds, char *msg)
       if (frq < 1)
       {
         frq = 1;
-        Serial.println("Provided frequency was below 1. Frequency set to 1.");
+        Serial.write("Provided\x20 frequency was below 1. Frequency set to 1.");
       }
       else if (frq > 1000)
       {
         frq = 1000;
-        Serial.println("Provided frequency was above 1000. Frequency set to 1000.");
+        Serial.print("Provided frequency was above 1000. Frequency set to 1000.");
       }
 
       // actually set options
@@ -153,6 +153,7 @@ void set_commands(struct commands *cmds, char *msg)
   else
   {
     Serial.write("Please provide a valid command.\n");
+    //Serial.println(option);
   }
 }
 
