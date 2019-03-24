@@ -1,6 +1,6 @@
 // use digital pins for sending trigger and receiving echo
-int trig_pin = 9;
-int echo_pin = 10;
+int trig_pin = 10;
+int echo_pin = 11;
 
 // long type for duration b/c lots of decimals
 long duration;

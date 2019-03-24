@@ -15,7 +15,7 @@ class Ultrasonic
 		// should probably use an array
 		// how long did it take to receive signal back
 		long duration;
-		
+
 		// hardware
 		int trig;
 		int echo;
@@ -27,10 +27,14 @@ class Ultrasonic
 			this->state = ON;
 			this->distance = 0.0;
 			this->duration = 0.0;
-			this->trig = 9;
-			this->echo = 10;
+			this->trig = 10;
+			this->echo = 11;
+			// Trigger is an Output
+			pinMode(this->trig, OUTPUT);
+			// Echo is an Input
+			pinMode(this->echo, INPUT);
 		};
-	
+
 		Ultrasonic(int trig, int echo)
 		{
 			this->state = OFF;
@@ -38,6 +42,10 @@ class Ultrasonic
 			this->duration = 0.0;
 			this->trig = trig;
 			this->echo = echo;
+			// Trigger is an Output
+			pinMode(this->trig, OUTPUT);
+			// Echo is an Input
+			pinMode(this->echo, INPUT);
 		};
 
 		// cleanup
@@ -46,7 +54,7 @@ class Ultrasonic
 		// getters / setters
 		int  get_state() { return this->state; }
 		void set_state(int state) { this->state = state; }
-	
+
 		float get_distance() { return this->distance; }
 		void  set_distance(float d) { distance = d; }
 
@@ -62,6 +70,8 @@ class Ultrasonic
 		// TODO: ADD ultrasonic sensor control code
 		void info()
 		{
+			start();
+			delay(1);
 			Serial.print("Duration: ");
 			Serial.println(this->duration);
 			Serial.print("Distance: ");
@@ -71,19 +81,19 @@ class Ultrasonic
 
 		void start()
 		{
-			if (this->state == OFF)
-				this->state = ON;
-			
+			// if (this->state == OFF)
+			// 	this->state = ON;
+
 			// Michael's code from arduino_see.ino
 			// clear
 			digitalWrite(this->trig, LOW);
 			delayMicroseconds(2);
-			
+
 			// 10 us pulse
 			digitalWrite(this->trig, HIGH);
 			delayMicroseconds(10);
 			digitalWrite(this->trig, LOW);
-			
+
 			// how long?
 			this->duration = pulseIn(this->echo, HIGH);
 
@@ -94,4 +104,4 @@ class Ultrasonic
 		}
 };
 
-#endif 	
+#endif

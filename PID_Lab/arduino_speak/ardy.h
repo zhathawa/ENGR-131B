@@ -16,16 +16,16 @@ class Ardy
 	// objects
     Joystick joy;
     PulseGenerator pgen;
-	Ultrasonic ultra;
+    Ultrasonic ultra;
 
   public:
     Ardy(){};
     ~Ardy(){};
-    
+
 
 	// TODO: JOYSTICK STUFF
     Joystick get_joystick() { return this->joy; }
-	
+
 	void set_joy_state(int state) { this->joy.set_state(state); }
 
     // PULSE GENERATOR STUFF
@@ -42,7 +42,7 @@ class Ardy
 
 	// TODO: ULTRASONIC SENSOR STUFF
 	Ultrasonic get_ultra() { return this->ultra; }
-	
+
 	// set key features
 	void set_ultra_state(int state) { this->ultra.set_state(state); }
 	void set_ultra_trig(int trig) { this->ultra.set_trig(trig); }
@@ -59,7 +59,7 @@ class Ardy
 		this->ultra.start();
 	}
 
-	
+
 };
 
 #endif
