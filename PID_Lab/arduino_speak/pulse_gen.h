@@ -73,7 +73,7 @@ class PulseGenerator
     {
       if (this->state == ON)
       {
-        this->state = OFF;
+        //this->state = OFF;
         digitalWrite(this->pin, OFF);
         delay(500/this->frequency);
       }
