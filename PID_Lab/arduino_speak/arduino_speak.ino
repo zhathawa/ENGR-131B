@@ -24,6 +24,7 @@ void setup() {
   pinMode(13, OUTPUT);
   Serial.begin(115200);
   delay(500);
+  ardy.set_init_lever();
   Serial.println("Ready!");
 }
 

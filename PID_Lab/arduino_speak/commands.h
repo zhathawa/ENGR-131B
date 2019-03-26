@@ -71,7 +71,7 @@ void set_commands(struct commands *cmds, char *msg)
       if (frq < 1)
       {
         frq = 1;
-        Serial.write("Provided\x20 frequency was below 1. Frequency set to 1.");
+        Serial.write("Provided frequency was below 1. Frequency set to 1.");
       }
       else if (frq > 1000)
       {
@@ -130,16 +130,53 @@ void set_commands(struct commands *cmds, char *msg)
   // servo
   else if (strncmp(option, "ANG", b2chk) == 0)
   {
+      if (option[3] == '?')
+      {
+        ardy.get_lever().info();
+        return;
+      }
 
+      option = strtok(NULL, " ");
+
+      // SET N for setting the frequency lims [1, 1000]
+      if (strncmp(option, "SET", b2chk) == 0)
+      {
+        // get frequency value
+        option = strtok(NULL, " ");
+
+        // make sure we have an integer
+        int angle = atoi(option);
+        Serial.println(angle);
+
+        // check frequency is appropriate
+        // TODO: come up with wittier output for inappropriate frequencies
+        if (angle < 0)
+        {
+          angle = 0;
+          Serial.write("Provided angle was below 0. Angle set to 0.");
+        }
+        else if (angle > 180)
+        {
+          angle = 180;
+          Serial.print("Provided angle was above 180. Angle set to 180.");
+        }
+
+        // actually set options
+        ardy.set_lever_ang(angle);
+        cmds->cmd = "SET";
+        cmds->opt = option;
+
+        return;
+      }
   }
 
   // ultrasound
   else if (strncmp(option, "ULT", b2chk) == 0)
   {
-	if (option[3] == '?')
-	{
-		ardy.get_ultra().info();
-	}
+  	if (option[3] == '?')
+  	{
+  		ardy.get_ultra().info();
+  	}
 
   }
 

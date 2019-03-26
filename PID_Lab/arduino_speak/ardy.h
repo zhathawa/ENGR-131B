@@ -4,6 +4,7 @@
 #include "joystick.h"
 #include "pulse_gen.h"
 #include "ultra.h"
+#include "lever.h"
 
 class Ardy
 {
@@ -17,6 +18,7 @@ class Ardy
     Joystick joy;
     PulseGenerator pgen;
     Ultrasonic ultra;
+    Lever lever;
 
   public:
     Ardy(){};
@@ -58,6 +60,10 @@ class Ardy
 	{
 		this->ultra.start();
 	}
+
+  Lever get_lever() { return this->lever; }
+  void set_lever_ang(int ang) { this->lever.set_ang(ang); }
+  void set_init_lever() { this->lever.init_write(); }
 
 
 };
