@@ -19,10 +19,18 @@ char msg[50];
 Ardy ardy;
 
 // setup
-void setup() {
+void setup()
+{
+  // initialize our commands struct
   init_commands(&cmds);
+
+  // start serial communication
   Serial.begin(115200);
+
+  // give everything time to set up
   delay(500);
+
+  // inform user
   Serial.println("Ready!");
 }
 

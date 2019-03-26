@@ -9,26 +9,20 @@
 class Ardy
 {
   private:
-	// TODO: PIN Tracking
-
-	// TODO: State tracking
-
-
 	// objects
-    Joystick joy;
+    //Joystick joy;
+    Lever lever;
     PulseGenerator pgen;
     Ultrasonic ultra;
-    Lever lever;
 
   public:
     Ardy(){};
     ~Ardy(){};
 
-
 	// TODO: JOYSTICK STUFF
-    Joystick get_joystick() { return this->joy; }
+  // Joystick get_joystick() { return this->joy; }
 
-	void set_joy_state(int state) { this->joy.set_state(state); }
+	//void set_joy_state(int state) { this->joy.set_state(state); }
 
     // PULSE GENERATOR STUFF
     PulseGenerator get_pgen() { return this->pgen; }
@@ -42,7 +36,6 @@ class Ardy
       this->pgen.pulse();
     }
 
-	// TODO: ULTRASONIC SENSOR STUFF
 	Ultrasonic get_ultra() { return this->ultra; }
 
 	// set key features
@@ -61,6 +54,7 @@ class Ardy
 		this->ultra.start();
 	}
 
+  // TODO: finish servo interface
   Lever get_lever() { return this->lever; }
   void set_lever_ang(int ang) { this->lever.set_ang(ang); }
   void set_init_lever() { this->lever.init_write(); }
