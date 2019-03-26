@@ -124,7 +124,6 @@ void set_commands(struct commands *cmds, char *msg)
       ardy.get_joystick().info();
       return;
     }
-
   }
 
   // servo
@@ -132,7 +131,7 @@ void set_commands(struct commands *cmds, char *msg)
   {
       if (option[3] == '?')
       {
-        ardy.get_lever().info();
+        Serial.println(ardy.get_lever_ang());
         return;
       }
 
@@ -177,7 +176,6 @@ void set_commands(struct commands *cmds, char *msg)
   	{
   		ardy.get_ultra().info();
   	}
-
   }
 
   // PID info
@@ -190,6 +188,7 @@ void set_commands(struct commands *cmds, char *msg)
   else
   {
     Serial.write("Please provide a valid command.\n");
+    //Serial.println(option);
   }
 }
 

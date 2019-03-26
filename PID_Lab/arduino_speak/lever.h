@@ -16,7 +16,7 @@ class Lever
     Lever()
     {
       this->pin = 6;
-      this->my_servo.attach(this->pin);
+      // this->my_servo.attach(this->pin);
       this->ang = this->my_servo.read();
     };
 
@@ -46,30 +46,72 @@ class Lever
 
     int get_ang()
     {
-      this->ang = my_servo.read();
-      return this->ang;
+      //this->ang = my_servo.read();
+      //return this->ang;
+
+      return my_servo.read();
     }
 
     void set_ang(int ang)
     {
-      this->ang = ang;
-      my_servo.write(this->ang);
+      // this->ang = ang;
+      // my_servo.write(this->ang);
+      // delay(50);
+      move(ang);
     }
 
     void info()
     {
-      get_ang();
-      Serial.println(this->ang);
+      Serial.println(get_ang());
     }
 
-    void init_write()
+    void init_attach()
     {
-      for (int i = 0; i <= 180; i++)
+      my_servo.attach(this->pin);
+    }
+
+    void move(int ang)
+    {
+      int del = 50;
+      int step = 10;
+      if (this->ang - ang < step && this->ang - ang > -step)
+      {
+        this->ang = ang;
+        my_servo.write(this->ang);
+        return;
+      }
+      int N = this->ang / step;
+      if (this->ang < ang)
+      {
+        for (int i = 1; i < N; i++)
         {
-          my_servo.write(i);
-          delay(500);
+          this->ang += step;
+          my_servo.write(this->ang);
+          delay(del);
         }
-        Serial.println("INITED!");
+        if (this->ang != ang)
+        {
+          this->ang = ang;
+          my_servo.write(this->ang);
+          delay(del);
+        }
+      }
+      else
+      {
+        for (int i = 1; i < N; i++)
+        {
+          this->ang -= step;
+          my_servo.write(this->ang);
+          delay(del);
+        }
+        if (this->ang != ang)
+        {
+          this->ang = ang;
+          my_servo.write(this->ang);
+          delay(del);
+        }
+      }
+
     }
 };
 
