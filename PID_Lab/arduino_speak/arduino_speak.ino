@@ -21,10 +21,8 @@ Ardy ardy;
 // setup
 void setup() {
   init_commands(&cmds);
-  pinMode(13, OUTPUT);
   Serial.begin(115200);
   delay(500);
-  ardy.set_init_lever();
   Serial.println("Ready!");
 }
 
@@ -51,12 +49,9 @@ void loop() {
     if (ardy.get_pgen().get_state() == ON)
     {
       ardy.pulse();
-      //Serial.println("Pulse Sent!");
       return;
     }
 
   }
 
-  // gotta do the math to make sure this syncs appropriately
-  // delay(100);
 }
