@@ -10,7 +10,7 @@ class Ardy
 {
   private:
 	// objects
-    //Joystick joy;
+    Joystick joy;
     Lever lever;
     PulseGenerator pgen;
     Ultrasonic ultra;
@@ -20,9 +20,9 @@ class Ardy
     ~Ardy(){};
 
 	// TODO: JOYSTICK STUFF
-  // Joystick get_joystick() { return this->joy; }
+    Joystick get_joystick() { return this->joy; }
 
-	//void set_joy_state(int state) { this->joy.set_state(state); }
+	void set_joy_state(int state) { this->joy.set_state(state); }
 
     // PULSE GENERATOR STUFF
     PulseGenerator get_pgen() { return this->pgen; }

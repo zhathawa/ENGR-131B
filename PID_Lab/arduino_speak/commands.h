@@ -190,7 +190,6 @@ void set_commands(struct commands *cmds, char *msg)
   else
   {
     Serial.write("Please provide a valid command.\n");
-    //Serial.println(option);
   }
 }
 
