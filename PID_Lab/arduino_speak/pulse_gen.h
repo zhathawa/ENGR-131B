@@ -54,7 +54,7 @@ class PulseGenerator
     void info()
     {
       Serial.print("State: ");
-      Serial.println(this->state);
+      Serial.print(this->state);
       Serial.print("Frequency: ");
       Serial.println(this->frequency);
     }
