@@ -16,7 +16,7 @@ class Lever
     Lever()
     {
       this->pin = 6;
-      // this->my_servo.attach(this->pin);
+      this->my_servo.attach(this->pin);
       this->ang = this->my_servo.read();
     };
 
@@ -46,28 +46,30 @@ class Lever
 
     int get_ang()
     {
-      //this->ang = my_servo.read();
-      //return this->ang;
-
-      return my_servo.read();
+      this->ang = my_servo.read();
+      return this->ang;
     }
 
     void set_ang(int ang)
     {
       this->ang = ang;
       my_servo.write(this->ang);
-      delay(150);
-      //move(ang);
     }
 
     void info()
     {
-      Serial.println(get_ang());
+      get_ang();
+      Serial.println(this->ang);
     }
 
-    void init_attach()
+    void init_write()
     {
-      my_servo.attach(this->pin);
+      for (int i = 0; i <= 180; i++)
+        {
+          my_servo.write(i);
+          delay(500);
+        }
+        Serial.println("INITED!");
     }
 };
 

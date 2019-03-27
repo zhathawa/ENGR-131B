@@ -10,9 +10,6 @@ class Joystick
     int state;
     int sensitivity;
 
-    int lower_limit;
-    int upper_limit;
-
 	// key hardware stuff
 	int pin;
 
@@ -20,29 +17,20 @@ class Joystick
     Joystick()
     {
       this->state = OFF;
-      this->sensitivity = 5;
-      this->pin = A0;
-
-      this->lower_limit = 1 / 5 * 1023;
-      this->upper_limit = 4 / 4 * 1023;
+      this->sensitivity = 0;
+      this->pin = 10;
     }
 
     Joystick(int sensitivity)
     {
       this->state = OFF;
       this->sensitivity = sensitivity;
-      this->pin = A0;
-      this->lower_limit = 1 / 5 * 1023;
-      this->upper_limit = 4 / 4 * 1023;
     }
 
     Joystick(int state, int sensitivity)
     {
       this->state = state;
       this->sensitivity = sensitivity;
-      this->pin = A0;
-      this->lower_limit = 1 / 5 * 1023;
-      this->upper_limit = 4 / 4 * 1023;
     }
 
     ~Joystick(){};
@@ -53,7 +41,7 @@ class Joystick
 
     int get_sensitivity() {return this->sensitivity;}
     void set_sensitivity(int sensitivity) {this->sensitivity = sensitivity;}
-
+    
     void info()
 	  {
 	    Serial.print("State: ");
@@ -61,24 +49,7 @@ class Joystick
 	    Serial.print("Sensitivity: ");
 	    Serial.println(this->sensitivity);
 	  }
-
-    int dircts()
-    {
-      // update voltage
-      int val = analogRead(this->pin);
-      if (val > this->upper_limit)
-      {
-        return UP;
-      }
-      else if (val < this->lower_limit)
-      {
-        return DOWN;
-      }
-      else
-      {
-        return NEWT;
-      }
-    }
+    
 };
 
 #endif
