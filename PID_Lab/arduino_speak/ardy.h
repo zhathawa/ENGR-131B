@@ -9,26 +9,36 @@
 class Ardy
 {
   private:
-	// TODO: PIN Tracking
+    // TODO: PIN Tracking
 
-	// TODO: State tracking
+    // TODO: State tracking
 
+    // handy dandy variables
+    long _start_time;
+    long _current_time;
+    long _elapsed_time;
 
-	// objects
+    // objects
     Joystick joy;
     PulseGenerator pgen;
     Ultrasonic ultra;
     Lever lever;
 
   public:
-    Ardy(){};
+    Ardy()
+    {
+      _start_time = 0;
+      _elapsed_time = 0;
+      _current_time = 0;
+    };
+
     ~Ardy(){};
 
 
-	// TODO: JOYSTICK STUFF
+    // TODO: JOYSTICK STUFF
     Joystick get_joystick() { return this->joy; }
 
-	void set_joy_state(int state) { this->joy.set_state(state); }
+    void set_joy_state(int state) { this->joy.set_state(state); }
 
     // PULSE GENERATOR STUFF
     PulseGenerator get_pgen() { return this->pgen; }
@@ -36,37 +46,69 @@ class Ardy
     void set_pgen_frq(int frq) { this->pgen.set_frequency(frq); }
     void set_pgen_state(int state) { this->pgen.set_state(state); }
 
-	// actually turn the pulse generator on
+    // actually turn the pulse generator on
     void pulse()
     {
       this->pgen.pulse();
     }
 
-	// TODO: ULTRASONIC SENSOR STUFF
-	Ultrasonic get_ultra() { return this->ultra; }
+    // TODO: ULTRASONIC SENSOR STUFF
+    Ultrasonic get_ultra() { return this->ultra; }
 
-	// set key features
-	void set_ultra_state(int state) { this->ultra.set_state(state); }
-	void set_ultra_trig(int trig) { this->ultra.set_trig(trig); }
-	void set_ultra_echo(int echo) { this->ultra.set_echo(echo); }
-	void set_pins(int trig, int echo)
-	{
-		set_ultra_trig(trig);
-		set_ultra_echo(echo);
-	}
+    // set key features
+    void set_ultra_state(int state) { this->ultra.set_state(state); }
+    void set_ultra_trig(int trig) { this->ultra.set_trig(trig); }
+    void set_ultra_echo(int echo) { this->ultra.set_echo(echo); }
+    void set_pins(int trig, int echo)
+    {
+    	set_ultra_trig(trig);
+    	set_ultra_echo(echo);
+    }
 
-	// turn on ultrasonic
-	void start_ultra()
-	{
-		this->ultra.start();
-	}
+    // turn on ultrasonic
+    void start_ultra()
+    {
+    	this->ultra.start();
+    }
 
-  Lever get_lever() { return this->lever; }
-  void set_lever_ang(int ang) { this->lever.set_ang(ang); }
-  int get_lever_ang() { return this->lever.get_ang(); }
-  void init_lever() { this->lever.init_attach(); }
+    Lever get_lever() { return this->lever; }
+    void set_lever_ang(int ang) { this->lever.set_ang(ang); }
+    int get_lever_ang() { return this->lever.get_ang(); }
+    void init_lever() { this->lever.init_attach(); }
+
+    // defined below
+    // gonna clean up file structur should we have time
+    void run();
 
 
 };
+
+void Ardy::run()
+{
+  // run without delay
+  // get the current time
+  _current_time = millis();
+
+  // if the elapsed time is above threshhold delay,
+  // then we can update the servo
+  if (_current_time - _start_time >= 150)
+  {
+    /*
+    ** 1) Calculate distance to ball
+    ** 2) Use distance to calculate the appropiate dTheta / speed
+    ** 3) Move the arm appropriately
+    ** 4) Update the _current_time
+    */
+
+    // first update the distance
+    this->ultra.start();
+
+    // update the start_time
+    _start_time = _current_time;
+  }
+
+
+  return;
+}
 
 #endif

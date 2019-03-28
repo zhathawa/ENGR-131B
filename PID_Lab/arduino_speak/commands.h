@@ -172,6 +172,7 @@ void set_commands(struct commands *cmds, char *msg)
   // ultrasound
   else if (strncmp(option, "ULT", b2chk) == 0)
   {
+    // inform the user
   	if (option[3] == '?')
   	{
   		ardy.get_ultra().info();
@@ -188,7 +189,6 @@ void set_commands(struct commands *cmds, char *msg)
   else
   {
     Serial.write("Please provide a valid command.\n");
-    //Serial.println(option);
   }
 }
 

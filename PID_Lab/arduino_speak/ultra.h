@@ -67,15 +67,10 @@ class Ultrasonic
 		int get_echo() { return this->echo; }
 		void set_echo(int echo) { this->echo = echo; }
 
-		// TODO: ADD ultrasonic sensor control code
 		void info()
 		{
 			start();
-			delay(1);
-			// Serial.print("Duration: ");
 			Serial.println(this->duration);
-			// Serial.print("Distance: ");
-			// Serial.println(this->distance);
 		}
 
 
@@ -101,6 +96,8 @@ class Ultrasonic
 			// speed of sound: 0.034 cm/us
 			// 2 to account for there and back
 			this->distance = this->duration * 0.034/2;
+
+			// if we want to print this to the console, we can
 		}
 };
 
