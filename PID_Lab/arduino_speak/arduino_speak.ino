@@ -42,9 +42,8 @@ void loop() {
     set_commands(&cmds, msg);
   }
 
-
   // we can do things
-  if (cmds.func == "PUL")
+  if (strncmp(cmds.func, "PUL", 3) == 0) //cmds.func == "PUL")
   {
     // PULSE
     if (ardy.get_pgen().get_state() == ON)
@@ -53,6 +52,13 @@ void loop() {
       return;
     }
 
+  }
+  else if (strncmp(cmds.func, "MAN", 3) == 0)
+  {
+    if (ardy.get_joy_state() == ON)
+    {
+      ardy.joy_run();
+    }
   }
 
 }
