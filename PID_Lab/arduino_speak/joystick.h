@@ -6,15 +6,15 @@
 class Joystick
 {
   private:
-	// key software stuff
+  	// key software stuff
     int state;
     int sensitivity;
 
     int lower_limit;
     int upper_limit;
 
-	// key hardware stuff
-	int pin;
+  	// key hardware stuff
+  	int pin;
 
   public:
     Joystick()
@@ -79,6 +79,16 @@ class Joystick
         return NEWT;
       }
     }
+
+    void joy_run();
+
 };
+
+void Joystick::joy_run()
+{
+  // migrate timnig code to Servo
+
+}
+
 
 #endif

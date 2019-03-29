@@ -22,6 +22,8 @@ Ardy ardy;
 void setup() {
   init_commands(&cmds);
   Serial.begin(115200);
+  // do we actually need this delay?
+  // I don't think we do.
   delay(500);
   ardy.init_lever();
   Serial.println("Ready!");
@@ -44,6 +46,9 @@ void loop() {
 
 
   // we can do things
+  /*
+  ** Just takes up time
+  ** TO DO: Remove from code
   if (cmds.func == "PUL")
   {
     // PULSE
@@ -54,5 +59,10 @@ void loop() {
     }
 
   }
+  */
+
+  // do some magic
+  //ardy.pid_run();
+  
 
 }

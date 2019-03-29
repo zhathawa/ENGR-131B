@@ -32,7 +32,7 @@ class Ardy
       _current_time = 0;
     };
 
-    ~Ardy(){};
+    ~Ardy() {};
 
 
     // TODO: JOYSTICK STUFF
@@ -77,13 +77,17 @@ class Ardy
     void init_lever() { this->lever.init_attach(); }
 
     // defined below
-    // gonna clean up file structur should we have time
-    void run();
-
+    // gonna clean up file structure should we have time
+    void pid_run();
+    void magic_change();
+    void magic_move();
 
 };
 
-void Ardy::run()
+void Ardy::magic_change() {};
+void Ardy::magic_move()   {};
+
+void Ardy::pid_run()
 {
   // run without delay
   // get the current time
@@ -103,10 +107,13 @@ void Ardy::run()
     // first update the distance
     this->ultra.start();
 
+    // magic
+    magic_change();
+    magic_move();
+
     // update the start_time
     _start_time = _current_time;
   }
-
 
   return;
 }

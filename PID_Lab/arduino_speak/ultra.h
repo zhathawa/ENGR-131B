@@ -11,6 +11,7 @@ class Ultrasonic
 
 		// distance to ball
 		float distance;
+		float prev_distance;
 
 		// should probably use an array
 		// how long did it take to receive signal back
@@ -26,6 +27,7 @@ class Ultrasonic
 		{
 			this->state = ON;
 			this->distance = 0.0;
+			this->prev_distance = 0.0;
 			this->duration = 0.0;
 			this->trig = 10;
 			this->echo = 11;
@@ -39,9 +41,11 @@ class Ultrasonic
 		{
 			this->state = OFF;
 			this->distance = 0.0;
+			this->prev_distance = 0.0;
 			this->duration = 0.0;
 			this->trig = trig;
 			this->echo = echo;
+
 			// Trigger is an Output
 			pinMode(this->trig, OUTPUT);
 			// Echo is an Input
@@ -57,6 +61,9 @@ class Ultrasonic
 
 		float get_distance() { return this->distance; }
 		void  set_distance(float d) { distance = d; }
+
+		float get_prev_distance() { return this->distance; }
+		void set_prev_distance(float d) { prev_distance = d; }
 
 		long get_duration() { return this->duration; }
 		void set_duration(long d) { duration = d; }
@@ -76,9 +83,6 @@ class Ultrasonic
 
 		void start()
 		{
-			// if (this->state == OFF)
-			// 	this->state = ON;
-
 			// Michael's code from arduino_see.ino
 			// clear
 			digitalWrite(this->trig, LOW);
