@@ -54,9 +54,14 @@ class Lever
 
     void set_ang(int ang)
     {
+	    Serial.print("Current angle: ");
+	    Serial.print(this->ang);
+      Serial.print("\tMoving to: ");
+	    Serial.println(ang);
+	  
       this->ang = ang;
       my_servo.write(this->ang);
-      delay(150);
+      //delay(1000);
       //move(ang);
     }
 

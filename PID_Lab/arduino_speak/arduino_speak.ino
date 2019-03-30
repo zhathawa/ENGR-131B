@@ -44,12 +44,14 @@ void loop() {
     set_commands(&cmds, msg);
   }
 
-
   // we can do things
   /*
   ** Just takes up time
   ** TO DO: Remove from code
   if (cmds.func == "PUL")
+=======
+  if (strncmp(cmds.func, "PUL", 3) == 0) //cmds.func == "PUL")
+>>>>>>> 6d0b84dccfed66761b8bec75489e9c4b558f4df4
   {
     // PULSE
     if (ardy.get_pgen().get_state() == ON)
@@ -64,5 +66,12 @@ void loop() {
   // do some magic
   //ardy.pid_run();
   
+  else if (strncmp(cmds.func, "MAN", 3) == 0)
+  {
+    if (ardy.get_joy_state() == ON)
+    {
+      ardy.joy_run();
+    }
+  }
 
 }

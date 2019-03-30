@@ -124,6 +124,38 @@ void set_commands(struct commands *cmds, char *msg)
       ardy.get_joystick().info();
       return;
     }
+
+    option = strtok(NULL, " ");
+    cmds->func = "MAN";
+
+    if (strncmp(option, "SET", b2chk) == 0)
+    {
+
+      option = strtok(NULL, " ");
+
+      int sensitivity = atoi(option);
+      if (sensitivity < 1)
+      {
+        Serial.println("Sensitivity was below acceptable value of 1. Sensitivity set to 1.");
+        sensitivity = 1;
+      }
+      else if (sensitivity > 10)
+      {
+        Serial.println("Sensitivity was above acceptable value of 10. Sensitivity set to 10.");
+        sensitivity = 10;
+      }
+
+      ardy.set_joy_sense(sensitivity);
+      //Serial.print("Sensitivity to: ");
+      //Serial.println(sensitivity);
+    }
+    else if (strncmp(option, "ON", 2) == 0)
+    {
+      Serial.println("Shoulda turned on");
+      ardy.set_joy_state(ON);
+    }
+
+    return;
   }
 
   // servo

@@ -10,8 +10,8 @@ class Joystick
     int state;
     int sensitivity;
 
-    int lower_limit;
-    int upper_limit;
+    float lower_limit;
+    float upper_limit;
 
   	// key hardware stuff
   	int pin;
@@ -23,8 +23,8 @@ class Joystick
       this->sensitivity = 5;
       this->pin = A0;
 
-      this->lower_limit = 1 / 5 * 1023;
-      this->upper_limit = 4 / 4 * 1023;
+      this->lower_limit = (1. / 5.) * 1023.;
+      this->upper_limit = (4. / 5.) * 1023.;
     }
 
     Joystick(int sensitivity)
@@ -32,8 +32,8 @@ class Joystick
       this->state = OFF;
       this->sensitivity = sensitivity;
       this->pin = A0;
-      this->lower_limit = 1 / 5 * 1023;
-      this->upper_limit = 4 / 4 * 1023;
+      this->lower_limit = 1. / 5. * 1023.;
+      this->upper_limit = 4. / 5. * 1023.;
     }
 
     Joystick(int state, int sensitivity)
@@ -41,8 +41,8 @@ class Joystick
       this->state = state;
       this->sensitivity = sensitivity;
       this->pin = A0;
-      this->lower_limit = 1 / 5 * 1023;
-      this->upper_limit = 4 / 4 * 1023;
+      this->lower_limit = 1. / 5. * 1023.;
+      this->upper_limit = 4. / 5. * 1023.;
     }
 
     ~Joystick(){};
@@ -57,38 +57,50 @@ class Joystick
     void info()
 	  {
 	    Serial.print("State: ");
-	    Serial.println(this->state);
+	    Serial.print(this->state);
 	    Serial.print("Sensitivity: ");
 	    Serial.println(this->sensitivity);
 	  }
 
-    int dircts()
+    int directions()
     {
       // update voltage
-      int val = analogRead(this->pin);
+      int val = analogRead(14);
+      // Serial.print("Joystick sent: ");
+      // Serial.print(val);
+      // Serial.print(": ");
+      // Serial.print(upper_limit);
+      // Serial.print(": ");
+      // Serial.println(lower_limit);
+
       if (val > this->upper_limit)
       {
+        // Serial.println("UP");
         return UP;
       }
       else if (val < this->lower_limit)
       {
+        // Serial.println("DOWN");
         return DOWN;
       }
       else
       {
+        // Serial.println("Nah");
         return NEWT;
       }
     }
 
     void joy_run();
+// migrate timnig code to Servo
+    int modifier()
+    {
+      return this->sensitivity * directions();
+    }
 
 };
 
 void Joystick::joy_run()
 {
-  // migrate timnig code to Servo
-
-}
-
+  };
 
 #endif

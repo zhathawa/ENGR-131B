@@ -14,6 +14,7 @@ class Ardy
     // TODO: State tracking
 
     // handy dandy variables
+    int _last_modifier;
     long _start_time;
     long _current_time;
     long _elapsed_time;
@@ -27,6 +28,7 @@ class Ardy
   public:
     Ardy()
     {
+      _last_modifier = -5;
       _start_time = 0;
       _elapsed_time = 0;
       _current_time = 0;
@@ -39,6 +41,10 @@ class Ardy
     Joystick get_joystick() { return this->joy; }
 
     void set_joy_state(int state) { this->joy.set_state(state); }
+    int get_joy_state() { return this->joy.get_state(); }
+    int get_joy_mod() { return this->joy.modifier(); }
+    void set_joy_sense(int sensitivity) { this->joy.set_sensitivity(sensitivity); }
+
 
     // PULSE GENERATOR STUFF
     PulseGenerator get_pgen() { return this->pgen; }
@@ -76,16 +82,38 @@ class Ardy
     int get_lever_ang() { return this->lever.get_ang(); }
     void init_lever() { this->lever.init_attach(); }
 
+
     // defined below
-    // gonna clean up file structure should we have time
+	// gonna clean up file structur should we have time
     void pid_run();
+    void joy_run();
+
     void magic_change();
     void magic_move();
-
 };
 
 void Ardy::magic_change() {};
 void Ardy::magic_move()   {};
+
+void Ardy::joy_run()
+{
+  int modifier = Ardy::get_joy_mod();
+  if (_last_modifier != modifier)
+  {
+    Serial.print("Modifier = ");
+    Serial.println(modifier);
+    _last_modifier = modifier;
+  }
+
+  if (modifier == NEWT)
+    return;
+
+  int ang = Ardy::get_lever_ang();
+  // Serial.println(ang);
+  Ardy::set_lever_ang(ang + modifier);
+  Serial.println(ang + modifier);
+
+}
 
 void Ardy::pid_run()
 {
