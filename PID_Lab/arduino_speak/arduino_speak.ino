@@ -2,10 +2,10 @@
 #include "ardy.h"
 #include "commands.h"
 #include "joystick.h"
-#include "pid.h"
 #include "pulse_gen.h"
 #include "states.h"
 #include "ultra.h"
+#include "PID_v1.h"
 
 // pointer for commands
 char* options;

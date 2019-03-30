@@ -6,7 +6,7 @@
 #ifndef _PID_H
 #define _PID_H
 
-class PID
+class PID_old
 {
   private:
     // sampling Frequency
@@ -35,7 +35,7 @@ class PID
 
   public:
     // constructors
-    PID()
+    PID_old()
     {
       set_sample_frq(1000);   // Hz
       set_set_point(155.24);  // mm
@@ -47,7 +47,7 @@ class PID
       _error = 0.;
     };
 
-    PID(int sp, double kp, double ki, double kd)
+    PID_old(int sp, double kp, double ki, double kd)
     {
       set_sample_frq(1000);
       set_set_point(sp);
@@ -60,7 +60,7 @@ class PID
     };
 
     // destructors
-    ~PID() {};
+    ~PID_old() {};
 
     // getters / setters
     void set_sample_frq(int frq) { this->_sample_frq = frq; }
