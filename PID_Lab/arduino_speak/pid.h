@@ -18,6 +18,12 @@ class PID
     // in mm
     double _set_point;
 
+    double* _input;
+    double _last_output;
+
+    double _error;
+    double _sum;
+
     // gains
     double _kp;
     double _ki;
@@ -37,6 +43,8 @@ class PID
       _state = OFF;
       _current_time = millis();
       _last_time = -5.;
+      _last_output = 0.;
+      _error = 0.;
     };
 
     PID(int sp, double kp, double ki, double kd)
@@ -47,6 +55,8 @@ class PID
       _state = OFF;
       _current_time = millis();
       _last_time = -5.;
+      _last_output = 0.;
+      _error = 0.;
     };
 
     // destructors
@@ -78,6 +88,18 @@ class PID
     unsigned long get_last_time() { return this->_last_time; }
 
     // magic pid code
+    void start()
+    {
+      // don't run the motor if we don't have to
+      if (_state == OFF)
+        return;
+
+        // where are we relative to the set point?
+        _error = _set_point - *(_input);
+
+
+
+    }
 
 };
 
