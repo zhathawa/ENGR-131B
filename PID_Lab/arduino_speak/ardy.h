@@ -2,9 +2,11 @@
 #define ARDY_H
 
 #include "joystick.h"
+#include "lever.h"
+#include "pid.h"
 #include "pulse_gen.h"
 #include "ultra.h"
-#include "lever.h"
+
 
 class Ardy
 {
@@ -35,7 +37,6 @@ class Ardy
     };
 
     ~Ardy() {};
-
 
     // TODO: JOYSTICK STUFF
     Joystick get_joystick() { return this->joy; }
@@ -100,8 +101,6 @@ void Ardy::joy_run()
   int modifier = Ardy::get_joy_mod();
   if (_last_modifier != modifier)
   {
-    Serial.print("Modifier = ");
-    Serial.println(modifier);
     _last_modifier = modifier;
   }
 
@@ -109,7 +108,6 @@ void Ardy::joy_run()
     return;
 
   int ang = Ardy::get_lever_ang();
-  // Serial.println(ang);
   Ardy::set_lever_ang(ang + modifier);
   Serial.println(ang + modifier);
 

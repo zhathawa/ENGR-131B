@@ -8,11 +8,10 @@ void setup() {
   Serial.begin(115200);
   lever.attach(6);
   servo_val = lever.read();
-  sensitivity = 20;
+  sensitivity = 10;
 }
 
 void loop() {
-  /*
   lever.write(servo_val - 1 * sensitivity);
   servo_val = lever.read();
   Serial.println(servo_val);
@@ -21,6 +20,5 @@ void loop() {
   sensitivity = -sensitivity;
   }
 
-  delay(200);
-  */
+  delay(40);
 }

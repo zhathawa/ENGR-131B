@@ -29,8 +29,8 @@ class Ultrasonic
 			this->distance = 0.0;
 			this->prev_distance = 0.0;
 			this->duration = 0.0;
-			this->trig = 10;
-			this->echo = 11;
+			this->trig = 11;
+			this->echo = 10;
 			// Trigger is an Output
 			pinMode(this->trig, OUTPUT);
 			// Echo is an Input
