@@ -109,7 +109,6 @@ void Ardy::joy_run()
 
   int ang = Ardy::get_lever_ang();
   Ardy::set_lever_ang(ang + modifier);
-  Serial.println(ang + modifier);
 
 }
 

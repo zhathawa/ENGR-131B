@@ -39,7 +39,7 @@ void set_commands(struct commands *cmds, char *msg)
     // we can update this with whatever we want?
     // would probably be better to move the info we actually want
     // to return to the ardy.h file
-    Serial.write("This is an Arduino Uno knock off.\n");
+    Serial.println("Your MATLAB has been hacked by ENGR131B!");
     cmds->func = "*IDN?";
   }
 
@@ -71,7 +71,7 @@ void set_commands(struct commands *cmds, char *msg)
       if (frq < 1)
       {
         frq = 1;
-        Serial.write("Provided frequency was below 1. Frequency set to 1.");
+        Serial.print("Provided frequency was below 1. Frequency set to 1.");
       }
       else if (frq > 1000)
       {
@@ -81,6 +81,7 @@ void set_commands(struct commands *cmds, char *msg)
 
       // actually set options
       ardy.set_pgen_frq(frq);
+      Serial.println("Frequency Set");
       cmds->cmd = "SET";
       cmds->opt = option;
 
@@ -136,23 +137,27 @@ void set_commands(struct commands *cmds, char *msg)
       int sensitivity = atoi(option);
       if (sensitivity < 1)
       {
-        Serial.println("Sensitivity was below acceptable value of 1. Sensitivity set to 1.");
+        Serial.print("Sensitivity was below acceptable value of 1. Sensitivity set to 1.");
         sensitivity = 1;
       }
       else if (sensitivity > 10)
       {
-        Serial.println("Sensitivity was above acceptable value of 10. Sensitivity set to 10.");
+        Serial.print("Sensitivity was above acceptable value of 10. Sensitivity set to 10.");
         sensitivity = 10;
       }
 
       ardy.set_joy_sense(sensitivity);
-      //Serial.print("Sensitivity to: ");
-      //Serial.println(sensitivity);
+      Serial.println("Sensitivity Set.");
     }
     else if (strncmp(option, "ON", 2) == 0)
     {
-      Serial.println("Shoulda turned on");
+      Serial.println("Manual Control Engaged!");
       ardy.set_joy_state(ON);
+    }
+    else if (strncmp(option, "OFF", b2chk) == 0)
+    {
+      Serial.println("Manual Control Disengaged.");
+      ardy.set_joy_state(OFF);
     }
 
     return;
@@ -184,7 +189,7 @@ void set_commands(struct commands *cmds, char *msg)
         if (angle < 0)
         {
           angle = 0;
-          Serial.write("Provided angle was below 0. Angle set to 0.");
+          Serial.print("Provided angle was below 0. Angle set to 0.");
         }
         else if (angle > 180)
         {
@@ -194,6 +199,7 @@ void set_commands(struct commands *cmds, char *msg)
 
         // actually set options
         ardy.set_lever_ang(angle);
+        Serial.println("Servo Moving.");
         cmds->cmd = "SET";
         cmds->opt = option;
 
@@ -214,13 +220,13 @@ void set_commands(struct commands *cmds, char *msg)
   // PID info
   else if (strncmp(option, "CON", b2chk) == 0)
   {
-
+    Serial.println("You've Ventured Too Far, Padawan. Go Bacck To Safety.");
   }
 
   // default
   else
   {
-    Serial.write("Please provide a valid command.\n");
+    Serial.println("Please provide a valid command.");
   }
 }
 

@@ -5,12 +5,12 @@ clc; clear; close all;
 ardy = serial('COM10','BaudRate',115200);
 % ardy = serial('/dev/ttyACM0','BaudRate',115200);
 fopen(ardy);
-u = fscanf(ardy);
-fprintf(u)
-% fprintf(ardy, ':PUL?');
+fscanf(ardy)
+
 fprintf(ardy, '*IDN?');
-out = fscanf(ardy, '%s');
-fprintf(out)
+fscanf(ardy)
+pause(1)
+
 fclose(ardy);
 delete(ardy);
 clear ardy
@@ -23,29 +23,32 @@ clc; clear; close all;
 ardy = serial('COM10','BaudRate',115200);
 % ardy = serial('/dev/ttyACM0','BaudRate',115200);
 fopen(ardy);
-u = fscanf(ardy);
+fscanf(ardy);
+pause(1)
 
 fprintf(ardy, ':PUL:SET -5');
+fscanf(ardy)
+pause(1)
+
 fprintf(ardy, ':PUL:ON');
-pause(0.5)
-out = fscanf(ardy, '%s');
-disp(out)
+fscanf(ardy)
 pause(5)
+
 fprintf(ardy, ':PUL:OFF');
-pause(0.5)
-out = fscanf(ardy, '%s');
-disp(out)
+fscanf(ardy)
+pause(1)
 
 fprintf(ardy, ':PUL:SET 50');
+fscanf(ardy)
+pause(1)
+
 fprintf(ardy, ':PUL:ON');
-pause(0.5)
-out = fscanf(ardy, '%s');
-disp(out)
+fscanf(ardy)
 pause(5)
+
 fprintf(ardy, ':PUL:OFF');
-pause(0.5)
-out = fscanf(ardy, '%s');
-disp(out)
+fscanf(ardy)
+pause(1)
 
 fclose(ardy);
 delete(ardy);
@@ -60,7 +63,8 @@ clc; clear; close all;
 ardy = serial('COM10','BaudRate',115200);
 % ardy = serial('/dev/ttyACM0','BaudRate',115200);
 fopen(ardy);
-u = fscanf(ardy);
+fscanf(ardy)
+pause(1)
 
 
 N=1000;
@@ -81,3 +85,38 @@ figure()
 
 pos = times*0.034/2;
 plot(pos)
+
+%% Test Joystick
+
+ardy = serial('COM10','BaudRate',115200);
+% ardy = serial('/dev/ttyACM0','BaudRate',115200);
+fopen(ardy);
+fscanf(ardy)
+pause(1)
+
+fprintf(ardy, ':MAN:ON');
+fscanf(ardy)
+pause(10)
+
+fprintf(ardy, ':MAN?');
+fscanf(ardy)
+pause(3)
+
+fprintf(ardy, ':MAN:SET 10');
+fscanf(ardy)
+pause(3)
+
+fprintf(ardy, ':MAN?');
+fscanf(ardy)
+pause(3)
+
+fprintf(ardy, ':MAN:OFF');
+fscanf(ardy)
+pause(3)
+
+fclose(ardy);
+delete(ardy);
+clear ardy
+pause(2)
+
+fprintf("END OF DEMO!\n")

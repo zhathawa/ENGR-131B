@@ -66,26 +66,17 @@ class Joystick
     {
       // update voltage
       int val = analogRead(14);
-      // Serial.print("Joystick sent: ");
-      // Serial.print(val);
-      // Serial.print(": ");
-      // Serial.print(upper_limit);
-      // Serial.print(": ");
-      // Serial.println(lower_limit);
 
       if (val > this->upper_limit)
       {
-        // Serial.println("UP");
         return UP;
       }
       else if (val < this->lower_limit)
       {
-        // Serial.println("DOWN");
         return DOWN;
       }
       else
       {
-        // Serial.println("Nah");
         return NEWT;
       }
     }
