@@ -63,7 +63,7 @@ class Lever
 
       this->ang = ang;
       my_servo.write(this->ang);
-      //delay(1000);
+      delay(150);
       //move(ang);
     }
 
