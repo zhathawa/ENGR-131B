@@ -220,7 +220,44 @@ void set_commands(struct commands *cmds, char *msg)
   // PID info
   else if (strncmp(option, "CON", b2chk) == 0)
   {
-    Serial.println("You've Ventured Too Far, Padawan. Go Bacck To Safety.");
+	// Fantastic tag-line
+    //Serial.println("You've Ventured Too Far, Padawan. Go Back To Safety.");
+
+	// get the next block
+	option = strtok(NULL, ":");
+
+	// the logic is based on the length of the string
+	// P?, I?, D?
+	if (strlen(option) == 2)
+	{
+		
+		return;
+	}
+
+	char* set = strtok(NULL, " ");
+	char* set_val = strtok(NULL, " ");
+
+	// make sure that we actually have what we think we have
+	if (strncmp(set, "SET", 3) == 0)
+	{
+		if (option[0] == 'P')
+		{
+			
+		}
+		else if (option[0] == 'I')
+		{
+		}
+		else if (option[0] == 'D')
+		{
+		}
+		else
+		{
+			Serial.println("Please pass a valid control option. (P, I, or D)");
+			return;
+		}
+	}
+	
+
   }
 
   // default

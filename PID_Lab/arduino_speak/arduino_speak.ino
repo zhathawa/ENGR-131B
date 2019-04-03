@@ -63,8 +63,8 @@ void loop() {
   */
 
   // do some magic
-  //ardy.pid_run();
-
+  // ardy.pid_run();
+  /*
   else if (strncmp(cmds.func, "MAN", 3) == 0)
   {
     if (ardy.get_joy_state() == ON)
@@ -72,5 +72,6 @@ void loop() {
       ardy.joy_run();
     }
   }
+  */
 
 }

@@ -3,7 +3,7 @@
 
 #include "joystick.h"
 #include "lever.h"
-#include "pid.h"
+#include "PID_v1.h"
 #include "pulse_gen.h"
 #include "ultra.h"
 
@@ -21,11 +21,16 @@ class Ardy
     long _current_time;
     long _elapsed_time;
 
+	double kp;
+	double ki;
+	double kd;
+
     // objects
     Joystick joy;
+    Lever lever;
+	PID pid;
     PulseGenerator pgen;
     Ultrasonic ultra;
-    Lever lever;
 
   public:
     Ardy()
@@ -34,6 +39,9 @@ class Ardy
       _start_time = 0;
       _elapsed_time = 0;
       _current_time = 0;
+	  kp = 0.;
+	  ki = 0.;
+	  kd = 0.;
     };
 
     ~Ardy() {};

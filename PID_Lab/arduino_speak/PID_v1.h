@@ -17,6 +17,10 @@ class PID
   #define P_ON_E 1
 
   //commonly used functions **************************************************************************
+	PID() {};								  // * added so we could have a default constructor.
+										  //   we'll use this to initialize a PID controller and control it from our
+										  //   ardy function
+
     PID(double*, double*, double*,        // * constructor.  links the PID to the Input, Output, and
         double, double, double, int, int);//   Setpoint.  Initial tuning parameters are also set here.
                                           //   (overload for specifying proportional mode)
