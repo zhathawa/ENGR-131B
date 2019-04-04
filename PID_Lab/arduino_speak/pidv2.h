@@ -39,6 +39,7 @@ class PID
     {
       this->state = OFF;
       this->zero_angle = 130;
+      this->servo_output = 100;
 
       this->PID_error = 0;
       this->previous_error = 0;
@@ -80,6 +81,8 @@ class PID
     int get_set_duration() { return this->set_duration; }
     void set_set_duration(int set_duration) { this->set_duration = set_duration; }
 
+    int get_servo() { return this->servo_output; }
+
     void ball_control()
     {
       if (this->state = OFF)
@@ -114,8 +117,6 @@ class PID
 
       // lever.write(this->servo_output);
       this->previous_error = this->PID_error;
-
-      delay(150);
     }
 
 };

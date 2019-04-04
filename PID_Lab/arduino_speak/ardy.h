@@ -111,6 +111,12 @@ class Ardy
     int con_get_state() { return this->pid.get_state(); }
     void con_set_state(int state) { this->pid.set_state(state); }
 
+    int con_get_duration() { return this->pid.get_set_duration(); }
+    void con_set_duration(int duration) { this->pid.set_set_duration(duration); }
+
+    void con_start_pid() { this->pid.ball_control(); }
+    int con_get_servo() { return this->pid.get_servo(); }
+
     // defined below
 	// gonna clean up file structur should we have time
     void pid_run();

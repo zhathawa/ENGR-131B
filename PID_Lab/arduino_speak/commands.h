@@ -222,11 +222,17 @@ void set_commands(struct commands *cmds, char *msg)
   {
 	// Fantastic tag-line
     //Serial.println("You've Ventured Too Far, Padawan. Go Back To Safety.");
+    cmds->func = "CON";
+
     if (option[3] == '?')
     {
       int state = ardy.con_get_state();
+      int setpoint = ardy.con_get_duration();
       Serial.print("State: ");
-      Serial.println(state);
+      Serial.print(state);
+      Serial.print(" || ");
+      Serial.print("Setpoint (us): ");
+      Serial.println(setpoint);
     }
   	// get the next block
   	option = strtok(NULL, ":");
@@ -284,6 +290,12 @@ void set_commands(struct commands *cmds, char *msg)
         ardy.con_set_za(za);
         Serial.println("ZeroAngle Set");
       }
+      else if (strncmp(set, "S", 1) == 0)
+      {
+        int sp = atoi(set_val);
+        ardy.con_set_duration(sp);
+        Serial.println("Setpoint Set");
+      }
   		else
   		{
   			Serial.println("Please pass a valid control option. (P, I, or D)");
@@ -293,16 +305,17 @@ void set_commands(struct commands *cmds, char *msg)
   	else if (strncmp(option, "ON", 2) == 0)
     {
       ardy.con_set_state(ON);
-      Serial.println("PID Control Engaged");
+      //cmds->cmd = ON;
+      // Serial.println("PID Control Engaged");
     }
     else if (strncmp(option, "OFF", 3) == 0)
     {
       ardy.con_set_state(OFF);
+      //cmds->cmd = OFF;
       Serial.println("PID Control Disengaged");
     }
 
   }
-
   // default
   else
   {

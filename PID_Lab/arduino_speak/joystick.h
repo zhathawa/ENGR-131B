@@ -58,6 +58,7 @@ class Joystick
 	  {
 	    Serial.print("State: ");
 	    Serial.print(this->state);
+      Serial.print(" || ");
 	    Serial.print("Sensitivity: ");
 	    Serial.println(this->sensitivity);
 	  }

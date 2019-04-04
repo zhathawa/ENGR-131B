@@ -119,4 +119,29 @@ delete(ardy);
 clear ardy
 pause(2)
 
+%% PID Control
+
+ardy = serial('COM10','BaudRate',115200);
+% ardy = serial('/dev/ttyACM0','BaudRate',115200);
+fopen(ardy);
+fscanf(ardy)
+pause(1)
+
+query(ardy, ":CON:SET:P 2.1")
+query(ardy, ":CON:SET:Z 138")
+
+pause(2)
+
+
+for i = 1:1000
+    query(ardy, ":CON:ON")
+end
+
+query(ardy, ":CON:OFF")
+
 fprintf("END OF DEMO!\n")
+
+fclose(ardy);
+delete(ardy);
+clear ardy
+pause(2)

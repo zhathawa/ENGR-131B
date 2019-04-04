@@ -20,6 +20,8 @@ char msg[50];
 // main interface with our various functions
 Ardy ardy;
 
+int sOutput;
+
 // setup
 void setup() {
   init_commands(&cmds);
@@ -44,6 +46,20 @@ void loop() {
 
     // parse and set commands up
     set_commands(&cmds, msg);
+  }
+
+  if (strncmp(cmds.func, "CON", 3) == 0)
+  {
+    if (ardy.con_get_state() == ON)
+    {
+      ardy.con_start_pid();
+      sOutput = ardy.con_get_servo();
+      // Serial.print("Running:: Next servo angle: ");
+      Serial.println(sOutput);
+      ardy.set_lever_ang(sOutput);
+      delay(150);
+
+    }
   }
 
   // we can do things
