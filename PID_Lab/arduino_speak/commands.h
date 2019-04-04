@@ -182,7 +182,7 @@ void set_commands(struct commands *cmds, char *msg)
 
         // make sure we have an integer
         int angle = atoi(option);
-        Serial.println(angle);
+        // Serial.println(angle);
 
         // check frequency is appropriate
         // TODO: come up with wittier output for inappropriate frequencies
@@ -306,7 +306,7 @@ void set_commands(struct commands *cmds, char *msg)
     {
       ardy.con_set_state(ON);
       //cmds->cmd = ON;
-      // Serial.println("PID Control Engaged");
+      Serial.println("PID Control Engaged");
     }
     else if (strncmp(option, "OFF", 3) == 0)
     {

@@ -55,7 +55,7 @@ void loop() {
       ardy.con_start_pid();
       sOutput = ardy.con_get_servo();
       // Serial.print("Running:: Next servo angle: ");
-      Serial.println(sOutput);
+      // Serial.println(sOutput);
       ardy.set_lever_ang(sOutput);
       delay(150);
 

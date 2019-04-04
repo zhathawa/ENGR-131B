@@ -85,13 +85,13 @@ class PID
 
     void ball_control()
     {
-      if (this->state = OFF)
-        return;
+      // if (this->state = OFF)
+      //   return;
 
       this->ultra.start();
       this->duration = this->ultra.get_duration();
-      Serial.print(this->duration);
-      Serial.print(" :: ");
+      // Serial.print(this->duration);
+      // Serial.print(" :: ");
 
       this->PID_error = this->set_duration - this->duration;
       // Calulate P
@@ -109,11 +109,11 @@ class PID
       if (this->PID_value > 180 - this->zero_angle) { this->PID_value = 180 - this->zero_angle; }
       if (this->PID_value < -this->zero_angle) { this->PID_value = -this->zero_angle; }
 
-      Serial.print(this->PID_value);
-      Serial.print(" :: ");
+      // Serial.print(this->PID_value);
+      // Serial.print(" :: ");
 
       this->servo_output = this->zero_angle + this->PID_value;
-      Serial.println(this->servo_output);
+      // Serial.println(this->servo_output);
 
       // lever.write(this->servo_output);
       this->previous_error = this->PID_error;

@@ -132,12 +132,24 @@ query(ardy, ":CON:SET:Z 138")
 
 pause(2)
 
+query(ardy, ":CON:ON")
 
-for i = 1:1000
-    query(ardy, ":CON:ON")
+N=100;
+times = zeros(1, N);
+for i = 1:N
+    out = query(ardy, ':ULT?');
+    out = str2num(out);
+    times(i) = out;
+    disp(i)
 end
 
 query(ardy, ":CON:OFF")
+
+figure()
+% plot(times)
+
+pos = times*0.034/2;
+plot(times)
 
 fprintf("END OF DEMO!\n")
 
