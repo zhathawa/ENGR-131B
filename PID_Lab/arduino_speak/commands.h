@@ -222,79 +222,84 @@ void set_commands(struct commands *cmds, char *msg)
   {
 	// Fantastic tag-line
     //Serial.println("You've Ventured Too Far, Padawan. Go Back To Safety.");
-
-	// get the next block
-	option = strtok(NULL, ":");
-
-	// the logic is based on the length of the string
-	// P?, I?, D?
-	if (strlen(option) == 2)
-	{
-    float kp = ardy.con_get_kp();
-    float ki = ardy.con_get_ki();
-    float kd = ardy.con_get_kd();
-    int z = ardy.con_get_za();
-    Serial.print("P: ");
-    Serial.print(kp);
-    Serial.print(" || ");
-    Serial.print("I: ");
-    Serial.print(ki);
-    Serial.print(" || ");
-    Serial.print("D: ");
-    Serial.print(kd);
-    Serial.print(" || ");
-    Serial.print("ZeroAngle: ");
-    Serial.println(z);
-		return;
-	}
-
-	char* set = strtok(NULL, " ");
-	char* set_val = strtok(NULL, " ");
-
-	// make sure that we actually have what we think we have
-	if (strncmp(option, "SET", 3) == 0)
-	{
-    Serial.println(set);
-    Serial.println(set_val);
-    // Serial.println("Made it here");
-    // Serial.println(option);
-		if (strncmp(set, "P", 1) == 0)
-		{
-      Serial.println("Close to set");
-      // get kp value
-      // option = strtok(NULL, " ");
-      Serial.println(set_val);
-      // make sure we have a float
-      float kp = atof(set_val);
-      Serial.println(kp);
-      ardy.con_set_kp(kp);
-      Serial.println("kp value set.");
-
-		}
-		else if (option[0] == 'I')
-		{
-		}
-		else if (option[0] == 'D')
-		{
-		}
-    else if (option[0] == 'Z')
+    if (option[3] == '?')
     {
-
+      int state = ardy.con_get_state();
+      Serial.print("State: ");
+      Serial.println(state);
     }
-		else
-		{
-			Serial.println("Please pass a valid control option. (P, I, or D)");
-			return;
-		}
-	}
-	else if (strncmp(set, "ON", 2) == 0)
-  {
+  	// get the next block
+  	option = strtok(NULL, ":");
 
-  }
-  else if (strncmp(set, "OFF", 3) == 0)
-  {
+  	// the logic is based on the length of the string
+  	// P?, I?, D?
+  	if (strlen(option) == 2 && option[1] == '?')
+  	{
+      float kp = ardy.con_get_kp();
+      float ki = ardy.con_get_ki();
+      float kd = ardy.con_get_kd();
+      int z = ardy.con_get_za();
+      Serial.print("P: ");
+      Serial.print(kp);
+      Serial.print(" || ");
+      Serial.print("I: ");
+      Serial.print(ki);
+      Serial.print(" || ");
+      Serial.print("D: ");
+      Serial.print(kd);
+      Serial.print(" || ");
+      Serial.print("ZeroAngle: ");
+      Serial.println(z);
+  		return;
+  	}
 
-  }
+  	char* set = strtok(NULL, " ");
+  	char* set_val = strtok(NULL, " ");
+
+  	// make sure that we actually have what we think we have
+  	if (strncmp(option, "SET", 3) == 0)
+  	{
+  		if (strncmp(set, "P", 1) == 0)
+  		{
+        float kp = atof(set_val);
+        ardy.con_set_kp(kp);
+        Serial.println("kp value set.");
+
+  		}
+  		else if (strncmp(set, "I", 1) == 0)
+  		{
+        float ki = atof(set_val);
+        ardy.con_set_ki(ki);
+        Serial.println("ki value set.");
+  		}
+  		else if (strncmp(set, "D", 1) == 0)
+  		{
+        float kd = atof(set_val);
+        ardy.con_set_kd(kd);
+        Serial.println("kd value set.");
+  		}
+      else if (strncmp(set, "Z", 1) == 0)
+      {
+        int za = atoi(set_val);
+        ardy.con_set_za(za);
+        Serial.println("ZeroAngle Set");
+      }
+  		else
+  		{
+  			Serial.println("Please pass a valid control option. (P, I, or D)");
+  			return;
+  		}
+  	}
+  	else if (strncmp(option, "ON", 2) == 0)
+    {
+      ardy.con_set_state(ON);
+      Serial.println("PID Control Engaged");
+    }
+    else if (strncmp(option, "OFF", 3) == 0)
+    {
+      ardy.con_set_state(OFF);
+      Serial.println("PID Control Disengaged");
+    }
 
   }
 

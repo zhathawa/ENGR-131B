@@ -108,6 +108,9 @@ class Ardy
     int con_get_za() {return this->pid.get_zero_angle(); }
     void con_set_za(int za) { this->pid.set_zero_angle(za); }
 
+    int con_get_state() { return this->pid.get_state(); }
+    void con_set_state(int state) { this->pid.set_state(state); }
+
     // defined below
 	// gonna clean up file structur should we have time
     void pid_run();
