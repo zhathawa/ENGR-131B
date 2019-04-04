@@ -95,6 +95,7 @@ class Ultrasonic
 
 			// how long?
 			this->duration = pulseIn(this->echo, HIGH);
+			if (this->duration > 100000) { this->duration = 10; }
 
 			// fancy math
 			// speed of sound: 0.034 cm/us
