@@ -68,13 +68,13 @@ class PID
     int get_zero_angle() { return this->zero_angle; }
     void set_zero_angle(int zero_angle) { this->zero_angle = zero_angle; }
 
-    int get_kp() { return this->kp; }
+    float get_kp() { return this->kp; }
     void set_kp(float kp) { this->kp = kp; }
 
-    int get_ki() { return this->ki; }
+    float get_ki() { return this->ki; }
     void set_ki(float ki) { this->ki = ki; }
 
-    int get_kd() { return this->kd; }
+    float get_kd() { return this->kd; }
     void set_kd(float kd) { this->kd = kd; }
 
     int get_set_duration() { return this->set_duration; }

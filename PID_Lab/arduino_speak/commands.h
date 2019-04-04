@@ -252,10 +252,23 @@ void set_commands(struct commands *cmds, char *msg)
 	char* set_val = strtok(NULL, " ");
 
 	// make sure that we actually have what we think we have
-	if (strncmp(set, "SET", 3) == 0)
+	if (strncmp(option, "SET", 3) == 0)
 	{
-		if (option[0] == 'P')
+    Serial.println(set);
+    Serial.println(set_val);
+    // Serial.println("Made it here");
+    // Serial.println(option);
+		if (strncmp(set, "P", 1) == 0)
 		{
+      Serial.println("Close to set");
+      // get kp value
+      // option = strtok(NULL, " ");
+      Serial.println(set_val);
+      // make sure we have a float
+      float kp = atof(set_val);
+      Serial.println(kp);
+      ardy.con_set_kp(kp);
+      Serial.println("kp value set.");
 
 		}
 		else if (option[0] == 'I')
