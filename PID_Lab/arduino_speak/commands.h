@@ -230,7 +230,7 @@ void set_commands(struct commands *cmds, char *msg)
 	// P?, I?, D?
 	if (strlen(option) == 2)
 	{
-		
+
 		return;
 	}
 
@@ -242,7 +242,7 @@ void set_commands(struct commands *cmds, char *msg)
 	{
 		if (option[0] == 'P')
 		{
-			
+
 		}
 		else if (option[0] == 'I')
 		{
@@ -250,13 +250,24 @@ void set_commands(struct commands *cmds, char *msg)
 		else if (option[0] == 'D')
 		{
 		}
+    else if (option[0] == 'Z')
+    {
+      
+    }
 		else
 		{
 			Serial.println("Please pass a valid control option. (P, I, or D)");
 			return;
 		}
 	}
-	
+	else if (strncmp(set, "ON", 2) == 0)
+  {
+
+  }
+  else if (strncmp(set, "OFF", 3) == 0)
+  {
+
+  }
 
   }
 
