@@ -2,7 +2,7 @@
 #define PIDV2_H
 
 #include "states.h"
-#include "ulra.h"
+#include "ultra.h"
 
 class PID
 {
@@ -20,6 +20,7 @@ class PID
     int set_duration;
     int last_set_duration;
 
+    int state;
     int zero_angle;
 
     //PID constants
@@ -111,12 +112,12 @@ class PID
       this->servo_output = this->zero_angle + this->PID_value;
       Serial.println(this->servo_output);
 
-      lever.write(this->servo_output);
+      // lever.write(this->servo_output);
       this->previous_error = this->PID_error;
 
       delay(150);
     }
 
-}
+};
 
 #endif

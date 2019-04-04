@@ -230,7 +230,21 @@ void set_commands(struct commands *cmds, char *msg)
 	// P?, I?, D?
 	if (strlen(option) == 2)
 	{
-
+    float kp = ardy.con_get_kp();
+    float ki = ardy.con_get_ki();
+    float kd = ardy.con_get_kd();
+    int z = ardy.con_get_za();
+    Serial.print("P: ");
+    Serial.print(kp);
+    Serial.print(" || ");
+    Serial.print("I: ");
+    Serial.print(ki);
+    Serial.print(" || ");
+    Serial.print("D: ");
+    Serial.print(kd);
+    Serial.print(" || ");
+    Serial.print("ZeroAngle: ");
+    Serial.println(z);
 		return;
 	}
 
@@ -252,7 +266,7 @@ void set_commands(struct commands *cmds, char *msg)
 		}
     else if (option[0] == 'Z')
     {
-      
+
     }
 		else
 		{

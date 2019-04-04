@@ -3,9 +3,10 @@
 
 #include "joystick.h"
 #include "lever.h"
-#include "PID_v1.h"
+// #include "PID_v1.h"
 #include "pulse_gen.h"
 #include "ultra.h"
+#include "pidv2.h"
 
 
 class Ardy
@@ -17,31 +18,32 @@ class Ardy
 
     // handy dandy variables
     int _last_modifier;
-    long _start_time;
-    long _current_time;
-    long _elapsed_time;
-
-	double kp;
-	double ki;
-	double kd;
+    // long _start_time;
+    // long _current_time;
+    // long _elapsed_time;
+  //
+	// double kp;
+	// double ki;
+	// double kd;
 
     // objects
     Joystick joy;
     Lever lever;
-	PID pid;
+	// PID pid;
     PulseGenerator pgen;
     Ultrasonic ultra;
+    PID pid;
 
   public:
     Ardy()
     {
-      _last_modifier = -5;
-      _start_time = 0;
-      _elapsed_time = 0;
-      _current_time = 0;
-	  kp = 0.;
-	  ki = 0.;
-	  kd = 0.;
+    //   _last_modifier = -5;
+    //   _start_time = 0;
+    //   _elapsed_time = 0;
+    //   _current_time = 0;
+	  // kp = 0.;
+	  // ki = 0.;
+	  // kd = 0.;
     };
 
     ~Ardy() {};
@@ -91,6 +93,20 @@ class Ardy
     int get_lever_ang() { return this->lever.get_ang(); }
     void init_lever() { this->lever.init_attach(); }
 
+    // :CON functions
+    PID get_pid() { return this->pid; }
+
+    float con_get_kp() {return this->pid.get_kp(); }
+    void con_set_kp(float kp) { this->pid.set_kp(kp); }
+
+    float con_get_ki() {return this->pid.get_ki(); }
+    void con_set_ki(float ki) { this->pid.set_ki(ki); }
+
+    float con_get_kd() {return this->pid.get_kd(); }
+    void con_set_kd(float kd) { this->pid.set_kd(kd); }
+
+    int con_get_za() {return this->pid.get_zero_angle(); }
+    void con_set_za(int za) { this->pid.set_zero_angle(za); }
 
     // defined below
 	// gonna clean up file structur should we have time
@@ -101,8 +117,8 @@ class Ardy
     void magic_move();
 };
 
-void Ardy::magic_change() {};
-void Ardy::magic_move()   {};
+// void Ardy::magic_change() {};
+// void Ardy::magic_move()   {};
 
 void Ardy::joy_run()
 {
@@ -120,35 +136,35 @@ void Ardy::joy_run()
 
 }
 
-void Ardy::pid_run()
-{
-  // run without delay
-  // get the current time
-  _current_time = millis();
-
-  // if the elapsed time is above threshhold delay,
-  // then we can update the servo
-  if (_current_time - _start_time >= 150)
-  {
-    /*
-    ** 1) Calculate distance to ball
-    ** 2) Use distance to calculate the appropiate dTheta / speed
-    ** 3) Move the arm appropriately
-    ** 4) Update the _current_time
-    */
-
-    // first update the distance
-    this->ultra.start();
-
-    // magic
-    magic_change();
-    magic_move();
-
-    // update the start_time
-    _start_time = _current_time;
-  }
-
-  return;
-}
+// void Ardy::pid_run()
+// {
+//   // run without delay
+//   // get the current time
+//   _current_time = millis();
+//
+//   // if the elapsed time is above threshhold delay,
+//   // then we can update the servo
+//   if (_current_time - _start_time >= 150)
+//   {
+//     /*
+//     ** 1) Calculate distance to ball
+//     ** 2) Use distance to calculate the appropiate dTheta / speed
+//     ** 3) Move the arm appropriately
+//     ** 4) Update the _current_time
+//     */
+//
+//     // first update the distance
+//     this->ultra.start();
+//
+//     // magic
+//     magic_change();
+//     magic_move();
+//
+//     // update the start_time
+//     _start_time = _current_time;
+//   }
+//
+//   return;
+// }
 
 #endif
