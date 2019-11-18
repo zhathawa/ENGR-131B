@@ -80,7 +80,6 @@ class Ultrasonic
 			Serial.println(this->duration);
 		}
 
-
 		void start()
 		{
 			// Michael's code from arduino_see.ino
